@@ -1,12 +1,13 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
+import VideoList from "./VideoList";
 
 export default function App() {
-  console.log(SearchBar);
+  console.log(VideoList);
   return (
     <div>
       <SearchBar />
-      <div>Hi guys</div>
+      <VideoList />
     </div>
   );
 }

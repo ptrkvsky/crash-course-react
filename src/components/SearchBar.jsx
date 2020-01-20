@@ -9,7 +9,11 @@ export default function SearchBar() {
 
   return (
     <div>
-      <input onChange={handleChange} value={searchText} />
+      <input
+        onChange={handleChange}
+        value={searchText}
+        placeholder="Choisissez un film"
+      />
       Input value {searchText}
     </div>
   );
