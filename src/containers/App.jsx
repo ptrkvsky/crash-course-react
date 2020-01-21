@@ -11,13 +11,14 @@ export default function App() {
   const API_KEY = "api_key=383fad9661a33d6164b48dd1309a05cd";
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        `${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`
-      );
-      setMovies(result.data.results);
-    };
-    fetchData();
+    axios
+      .get(`${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`)
+      .then(res => {
+        setMovies(res.data.results);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }, []);
 
   return (
