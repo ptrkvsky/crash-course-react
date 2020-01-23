@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import VideoListItem from "../components/VideoListItem";
 
 export default function VideoList({ movies }) {
@@ -15,3 +16,7 @@ export default function VideoList({ movies }) {
     </ul>
   );
 }
+
+VideoList.propTypes = {
+  movies: PropTypes.array.isRequired
+};

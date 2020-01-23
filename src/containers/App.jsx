@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import VideoList from "./VideoList";
 import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
+import Video from "../components/Video";
 import axios from "axios";
 
 export default function App() {
   const [movies, setMovies] = useState([]); // Most popular movies
+  const [keyPrimeMovie, setPrimeMovieKey] = useState(null);
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
 
   //API URL
@@ -14,31 +16,44 @@ export default function App() {
   const API_KEY = "api_key=383fad9661a33d6164b48dd1309a05cd";
 
   // Requet API. Want to know more ? https://www.robinwieruch.de/react-hooks-fetch-data
-  useEffect(() => {
-    initMovies();
-  }, []);
 
-  const initMovies = () => {
-    axios
-      .get(`${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`)
-      .then(res => {
+  //Function that fetch current popular movies and set a primemovie(with trailer)
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        const res = await axios(
+          `${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`
+        );
         setMovies(res.data.results.slice(1, 6));
         setPrimeMovie(res.data.results.slice(0, 1));
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const GetVideo = movie => {
-    if (movie.length > 0) {
-      console.log(
-        `${API_END_POINT}movie/${movie[0].id}?append_to_response=videos&${API_KEY}`
-      );
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
     }
-  };
 
-  // Function that test if array of movie exist before display
+    fetchMovies();
+  }, []);
+
+  //Second function that get a movie
+  useEffect(() => {
+    async function setVideoKey(movie) {
+      try {
+        const res = await axios(
+          `${API_END_POINT}movie/${movie[0].id}?append_to_response=videos&${API_KEY}`
+        );
+        setPrimeMovieKey(res.data.videos.results[0].key);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    if (primeMovie.length > 0) {
+      setVideoKey(primeMovie);
+    }
+  }, [primeMovie]);
+
+  // Function that test if an array of movie exist before display
   const renderMovieArray = movie => {
     if (movie.length > 0) {
       return (
@@ -53,9 +68,8 @@ export default function App() {
   return (
     <section>
       <SearchBar />
-      {/*console.log(primeMovie[0]) */}
-      {GetVideo(primeMovie)}
       {renderMovieArray(primeMovie)}
+      <Video moviekey={keyPrimeMovie} />
       <VideoList movies={movies} />
     </section>
   );

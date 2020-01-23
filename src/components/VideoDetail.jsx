@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function VideoTitle({ title, description }) {
   return (
@@ -8,3 +9,8 @@ export default function VideoTitle({ title, description }) {
     </article>
   );
 }
+
+VideoTitle.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired
+};
