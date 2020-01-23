@@ -1,0 +1,20 @@
+body {
+  background-color: #1f1f1f;
+  color: #ff2c77;
+}
+img {
+  max-width: 100%;
+}
+
+.searchbar {
+  margin: 50px 0 30px;
+}
+
+li:hover {
+  background-color: #e0e0e0;
+}
+
+.title_list_item {
+  padding-top: 40px;
+  text-align: center;
+}

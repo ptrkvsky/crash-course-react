@@ -4,6 +4,7 @@ import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
 import Video from "../components/Video";
 import axios from "axios";
+import "../styles/style.css";
 
 export default function App() {
   const [movies, setMovies] = useState([]); // Most popular movies
@@ -67,10 +68,18 @@ export default function App() {
 
   return (
     <section>
-      <SearchBar />
-      {renderMovieArray(primeMovie)}
-      <Video moviekey={keyPrimeMovie} />
-      <VideoList movies={movies} />
+      <div className="searchbar">
+        <SearchBar />
+      </div>
+      <div className="row">
+        <div className="col-md-8">
+          <Video moviekey={keyPrimeMovie} />
+          {renderMovieArray(primeMovie)}
+        </div>
+        <div className="col-md-4">
+          <VideoList movies={movies} />
+        </div>
+      </div>
     </section>
   );
 }

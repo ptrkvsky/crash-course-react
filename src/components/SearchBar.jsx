@@ -8,13 +8,16 @@ export default function SearchBar() {
   };
 
   return (
-    <div>
-      <input
-        onChange={handleChange}
-        value={searchText}
-        placeholder="Choisissez un film"
-      />
-      Input value {searchText}
+    <div className="row">
+      <div className="col8">
+        <input
+          className="form-control input-lg"
+          type="text"
+          onChange={handleChange}
+          value={searchText}
+          placeholder="Choisissez un film"
+        />
+      </div>
     </div>
   );
 }
