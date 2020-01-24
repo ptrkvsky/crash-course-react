@@ -2,7 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import VideoListItem from "../components/VideoListItem";
 
-export default function VideoList({ movies }) {
+export default function VideoList(props) {
+  const { movies } = props;
+
+  const receiveCallback = movie => {
+    props.sendMovie(movie);
+  };
+
   return (
     <>
       <ul>
@@ -12,9 +18,9 @@ export default function VideoList({ movies }) {
         {movies.map(movie => (
           <VideoListItem
             key={movie.id}
-            name={movie.original_title}
-            image={movie.poster_path}
+            movie={movie}
             alt={`Affiche ${movie.original_title}`}
+            callback={receiveCallback}
           />
         ))}
       </ul>
@@ -23,5 +29,6 @@ export default function VideoList({ movies }) {
 }
 
 VideoList.propTypes = {
-  movies: PropTypes.array.isRequired
+  movies: PropTypes.array.isRequired,
+  sendMovie: PropTypes.func.isRequired
 };

@@ -1,18 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export default function VideoListItem({ name, image }) {
+export default function VideoListItem({ movie, callback }) {
+  const handleClick = () => {
+    callback(movie);
+  };
+
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/";
   return (
-    <li className="list-group-item">
+    <li onClick={handleClick} className="list-group-item">
       <div className="media">
         <img
-          alt={name}
+          alt={movie.name}
           className="align-self-center mr-3 img-rounded"
-          src={IMAGE_BASE_URL + image}
+          src={IMAGE_BASE_URL + movie.poster_path}
         ></img>
         <div className="media-body">
-          <h3 className="title_list_item">{name}</h3>
+          <h3 className="title_list_item">{movie.name}</h3>
         </div>
       </div>
     </li>
@@ -20,6 +24,6 @@ export default function VideoListItem({ name, image }) {
 }
 
 VideoListItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired
+  movie: PropTypes.object.isRequired,
+  callback: PropTypes.func.isRequired
 };
