@@ -4,13 +4,15 @@ import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
 import Video from "../components/Video";
 import axios from "axios";
-import "../styles/style.css";
 import isEmpty from "../utils/isEmpty";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../styles/style.css";
 
 export default function App() {
   const [movies, setMovies] = useState([]); // Most popular movies
   const [keyPrimeMovie, setPrimeMovieKey] = useState({});
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
+  const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
 
   //API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
@@ -70,10 +72,35 @@ export default function App() {
         const res = await axios(
           `${API_END_POINT}${SEARCH_URL}&${API_KEY}&query=${text}`
         );
-        if (res) {
-          console.log(res);
+        if (res.data.total_results > 0) {
+          const tabMovieTypehead = res.data.results.slice(0, 10); // Table for typehead search (autocomplete)
           const tabPrimeMovie = res.data.results.slice(0, 1);
           setPrimeMovie(tabPrimeMovie[0]);
+          setMoviesTypehead(tabMovieTypehead);
+        } else {
+          console.log("no search results sorry");
+        }
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
+    }
+    searchMovie();
+  };
+
+  const receiveHandleChange = text => {
+    async function searchMovie() {
+      try {
+        if (text.length > 1) {
+          const res = await axios(
+            `${API_END_POINT}${SEARCH_URL}&${API_KEY}&query=${text}`
+          );
+          if (res.data.total_results > 0) {
+            const tabMovieTypehead = res.data.results.slice(0, 10); // Table for typehead search (autocomplete)
+            setMoviesTypehead(tabMovieTypehead);
+          } else {
+            console.log("no search results sorry");
+          }
         }
       } catch (e) {
         console.log(e);
@@ -86,7 +113,11 @@ export default function App() {
   return (
     <section>
       <div className="searchbar">
-        <SearchBar sendSearchText={receiveSearchText} />
+        <SearchBar
+          tabMovieTypehead={moviesTypehead}
+          sendSearchText={receiveSearchText}
+          sendHandleChange={receiveHandleChange}
+        />
       </div>
       <div className="row">
         <div className="col-md-8">
