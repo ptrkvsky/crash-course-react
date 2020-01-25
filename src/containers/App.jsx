@@ -15,6 +15,7 @@ export default function App() {
   //API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
   const POPULAR_MOVIES_URL = "discover/movie?sort_by=popularity.desc&page=1";
+  const SEARCH_URL = "search/movie/?language=fr&include_adult=false";
   const API_KEY = "api_key=383fad9661a33d6164b48dd1309a05cd";
 
   // Requet API. Want to know more ? https://www.robinwieruch.de/react-hooks-fetch-data
@@ -26,7 +27,7 @@ export default function App() {
           `${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`
         );
         setMovies(res.data.results.slice(1, 6));
-        //console.log("premmier call de set movie", res.data.results.slice(0, 1));
+
         const tabPrimeMovie = res.data.results.slice(0, 1);
         setPrimeMovie(tabPrimeMovie[0]);
       } catch (e) {
@@ -45,7 +46,9 @@ export default function App() {
         const res = await axios(
           `${API_END_POINT}movie/${movie.id}?append_to_response=videos&${API_KEY}`
         );
-        setPrimeMovieKey(res.data.videos.results[0].key);
+        if (res.data.videos.results.length > 0) {
+          setPrimeMovieKey(res.data.videos.results[0].key);
+        }
       } catch (e) {
         console.log(e);
         throw e;
@@ -61,10 +64,29 @@ export default function App() {
     setPrimeMovie(movie);
   };
 
+  const receiveSearchText = text => {
+    async function searchMovie() {
+      try {
+        const res = await axios(
+          `${API_END_POINT}${SEARCH_URL}&${API_KEY}&query=${text}`
+        );
+        if (res) {
+          console.log(res);
+          const tabPrimeMovie = res.data.results.slice(0, 1);
+          setPrimeMovie(tabPrimeMovie[0]);
+        }
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
+    }
+    searchMovie();
+  };
+
   return (
     <section>
       <div className="searchbar">
-        <SearchBar />
+        <SearchBar sendSearchText={receiveSearchText} />
       </div>
       <div className="row">
         <div className="col-md-8">
