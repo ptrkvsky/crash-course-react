@@ -1,34 +1,51 @@
 import React, { useState, useEffect } from "react";
+//Components
 import VideoList from "./VideoList";
 import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
 import Video from "../components/Video";
+import Header from "./Header";
+
+// Lib + helpers
 import axios from "axios";
 import isEmpty from "../utils/isEmpty";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../styles/style.css";
+import getRandom from "../utils/getRandom";
 
+// Style
+import "bootstrap/dist/css/bootstrap.min.css";
+import GlobalStyle from "../styles/GlobalStyle";
+import styled from "@emotion/styled";
+
+// Démarrage application
 export default function App() {
   const [movies, setMovies] = useState([]); // Most popular movies
   const [keyPrimeMovie, setPrimeMovieKey] = useState({});
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
   const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
 
-  //API URL
+  // API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
   const POPULAR_MOVIES_URL = "discover/movie?sort_by=popularity.desc&page=1";
   const SEARCH_URL = "search/movie/?language=fr&include_adult=false";
   const API_KEY = "api_key=383fad9661a33d6164b48dd1309a05cd";
 
   // Requet API. Want to know more ? https://www.robinwieruch.de/react-hooks-fetch-data
-  //Function that fetch current popular movies and set a primemovie(with trailer)
+  // Function that fetch current popular movies and set a primemovie(with trailer)
   useEffect(() => {
     async function fetchMovies() {
       try {
         const res = await axios(
           `${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`
         );
-        setMovies(res.data.results.slice(1, 6));
+
+        const popularMovies = res.data.results.slice(1, 6);
+        console.log(popularMovies);
+        // Add random price to movie between 20 and 30
+        popularMovies.map(movie => {
+          return (movie.price = getRandom(20, 30));
+        });
+
+        setMovies(popularMovies);
 
         const tabPrimeMovie = res.data.results.slice(0, 1);
         setPrimeMovie(tabPrimeMovie[0]);
@@ -41,7 +58,7 @@ export default function App() {
     fetchMovies();
   }, []);
 
-  //Second function that get a movie
+  // Second function that get a movie
   useEffect(() => {
     async function setVideoKey(movie) {
       try {
@@ -112,24 +129,20 @@ export default function App() {
 
   return (
     <section>
-      <div className="searchbar">
+      <GlobalStyle />
+      <Header />
+      <div className="max-container">
         <SearchBar
           tabMovieTypehead={moviesTypehead}
           sendSearchText={receiveSearchText}
           sendHandleChange={receiveHandleChange}
         />
-      </div>
-      <div className="row">
-        <div className="col-md-8">
-          <Video moviekey={keyPrimeMovie} />
-          <VideoDetail
-            title={primeMovie.original_title}
-            description={primeMovie.overview}
-          />
-        </div>
-        <div className="col-md-4">
-          <VideoList sendMovie={receiveMovie} movies={movies} />
-        </div>
+        <Video moviekey={keyPrimeMovie} />
+        <VideoDetail
+          title={primeMovie.original_title}
+          description={primeMovie.overview}
+        />
+        <VideoList sendMovie={receiveMovie} movies={movies} />
       </div>
     </section>
   );

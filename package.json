@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
     "axios": "^0.19.1",
     "bootstrap": "^4.4.1",
     "lodash": "^4.17.10",

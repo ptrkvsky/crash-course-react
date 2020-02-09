@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FormGroup } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import PropTypes from "prop-types";
 import "react-bootstrap-typeahead/css/Typeahead.css";
@@ -15,7 +14,7 @@ export default function SearchBar({
   const handleChange = e => {
     sendHandleChange(searchText);
     const collecMovies = tabMovieTypehead.map(movie => {
-      const objMovie = { name: movie.original_title };
+      const objMovie = { name: movie.title };
       return objMovie;
     });
     setAutoComplete(collecMovies);
@@ -29,31 +28,27 @@ export default function SearchBar({
 
   console.log(searchText);
   return (
-    <div className="row">
-      <div className="col-md-12">
-        <form className="" onSubmit={handleSubmit}>
-          <div className="input-group mb-3">
-            <Typeahead
-              {...searchText}
-              id="searchBar"
-              labelKey="name"
-              options={autoComplete}
-              minLength="4"
-              placeholder="Choisir un film"
-              onInputChange={handleChange}
-              onSearch={handleChange}
-              multiple={false}
-              value={searchText}
-            />
-            <span className="input-group-append">
-              <button className="btn btn-outline-secondary" type="submit">
-                Go !
-              </button>
-            </span>
-          </div>
-        </form>
+    <form className="" onSubmit={handleSubmit}>
+      <div className="input-group mb-3">
+        <Typeahead
+          {...searchText}
+          id="searchBar"
+          labelKey="name"
+          options={autoComplete}
+          minLength="4"
+          placeholder="Choisir un film"
+          onInputChange={handleChange}
+          onSearch={handleChange}
+          multiple={false}
+          value={searchText}
+        />
+        <span className="input-group-append">
+          <button className="btn btn-outline-secondary" type="submit">
+            Go !
+          </button>
+        </span>
       </div>
-    </div>
+    </form>
   );
 }
 

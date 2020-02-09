@@ -10,11 +10,9 @@ export default function VideoList(props) {
   };
 
   return (
-    <>
-      <ul>
-        <li className="list-group-item">
-          <h2>Les films populaires</h2>
-        </li>
+    <section>
+      <h2>Les films populaires</h2>
+      <div className="video-list">
         {movies.map(movie => (
           <VideoListItem
             key={movie.id}
@@ -23,8 +21,8 @@ export default function VideoList(props) {
             callback={receiveCallback}
           />
         ))}
-      </ul>
-    </>
+      </div>
+    </section>
   );
 }
 
