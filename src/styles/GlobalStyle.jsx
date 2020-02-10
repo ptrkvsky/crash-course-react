@@ -1,11 +1,12 @@
 import React from "react";
 import { Global, css } from "@emotion/core";
+import theme from "../styles/theme";
 
 export default function GlobalStyle() {
   return (
     <Global
       styles={css`
-        /* RESET CSS */
+        /* RESET CSS ERIC MEYER */
         html,
         body,
         div,
@@ -135,20 +136,45 @@ export default function GlobalStyle() {
         /* STYLES GLOBAL */
         /* ------------- */
         body {
-          background-color: #1f1f1f;
-          color: #ff2c77;
+          background-color: ${theme.colors.mainBg};
+          color: ${theme.colors.main};
           font-size: 18px;
+          font-family: ${theme.fonts.primary};
         }
         img {
           max-width: 100%;
         }
-        /* HELPERS */
 
         /* LAYOUT */
         .max-container {
           width: 1440px;
           margin-left: auto;
           margin-right: auto;
+          max-width: 100%;
+        }
+
+        /* SEARCH BAR */
+        .searchbar {
+          color: ${theme.colors.main};
+
+          .rbt-input-main {
+            border-radius: 10px;
+            background: linear-gradient(145deg, #222833, #1d212b);
+            box-shadow: 20px 20px 60px #1b1f29, -20px -20px 60px #252b37;
+            border: 1px solid #1f222b;
+            transition: all 0.3s ease-in-out;
+            &:hover {
+              border-bottom: 1px solid ${theme.colors.primary};
+            }
+          }
+        }
+        .btn {
+          border: none;
+          color: ${theme.colors.primary};
+          text-transform: uppercase;
+          font-family: ${theme.fonts.logo};
+          font-weight: 600;
+          font-size: 24px;
         }
       `}
     />

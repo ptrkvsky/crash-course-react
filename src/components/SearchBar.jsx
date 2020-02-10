@@ -26,17 +26,16 @@ export default function SearchBar({
     e.preventDefault();
   };
 
-  console.log(searchText);
   return (
     <form className="" onSubmit={handleSubmit}>
-      <div className="input-group mb-3">
+      <div className="input-group mb-3 searchbar">
         <Typeahead
           {...searchText}
           id="searchBar"
           labelKey="name"
           options={autoComplete}
-          minLength="4"
-          placeholder="Choisir un film"
+          minLength="3"
+          placeholder="Quel est le film de vos rêves ?"
           onInputChange={handleChange}
           onSearch={handleChange}
           multiple={false}

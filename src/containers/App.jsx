@@ -16,6 +16,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "../styles/GlobalStyle";
 import styled from "@emotion/styled";
 
+const PrimeVideo = styled("div")`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 60px 0;
+  grid-gap: 60px;
+`;
+
 // Démarrage application
 export default function App() {
   const [movies, setMovies] = useState([]); // Most popular movies
@@ -133,15 +140,18 @@ export default function App() {
       <Header />
       <div className="max-container">
         <SearchBar
+          id="search"
           tabMovieTypehead={moviesTypehead}
           sendSearchText={receiveSearchText}
           sendHandleChange={receiveHandleChange}
         />
-        <Video moviekey={keyPrimeMovie} />
-        <VideoDetail
-          title={primeMovie.original_title}
-          description={primeMovie.overview}
-        />
+        <PrimeVideo>
+          <Video moviekey={keyPrimeMovie} />
+          <VideoDetail
+            title={primeMovie.original_title}
+            description={primeMovie.overview}
+          />
+        </PrimeVideo>
         <VideoList sendMovie={receiveMovie} movies={movies} />
       </div>
     </section>
