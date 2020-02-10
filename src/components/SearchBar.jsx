@@ -22,6 +22,7 @@ export default function SearchBar({
   };
 
   const handleSubmit = e => {
+    console.log(handleSubmit);
     sendSearchText(document.querySelector(".rbt-input-main").value);
     e.preventDefault();
   };
@@ -34,7 +35,7 @@ export default function SearchBar({
           id="searchBar"
           labelKey="name"
           options={autoComplete}
-          minLength="3"
+          minLength={3}
           placeholder="Quel est le film de vos rêves ?"
           onInputChange={handleChange}
           onSearch={handleChange}

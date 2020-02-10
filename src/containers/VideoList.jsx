@@ -12,7 +12,6 @@ const VideosContainer = styled("div")`
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 33%;
-  white-space: nowrap;
   box-shadow: -11px -11px 22px #1b1f28, 11px 11px 22px #252b38;
 `;
 
@@ -21,11 +20,9 @@ const Titre = styled("h2")`
   margin-bottom: 30px;
 `;
 
-export default function VideoList(props) {
-  const { movies } = props;
-
+export default function VideoList({ sendPrimeMovie, movies }) {
   const receiveCallback = movie => {
-    props.sendMovie(movie);
+    sendPrimeMovie(movie);
   };
 
   return (
@@ -47,5 +44,5 @@ export default function VideoList(props) {
 
 VideoList.propTypes = {
   movies: PropTypes.array.isRequired,
-  sendMovie: PropTypes.func.isRequired
+  sendPrimeMovie: PropTypes.func.isRequired
 };

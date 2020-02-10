@@ -43,17 +43,21 @@ const AddToBasket = styled("p")`
   }
 `;
 
-export default function VideoTitle({ title, description }) {
+export default function VideoTitle({ sendMovie, movie }) {
+  const { title, overview } = movie;
+
   return (
     <VideoContainer>
       <TitleVideo>{title}</TitleVideo>
-      <DescVideo>{description}</DescVideo>
-      <AddToBasket>Ajouter au panier</AddToBasket>
+      <DescVideo>{overview}</DescVideo>
+      <AddToBasket onClick={() => sendMovie(movie)}>
+        Ajouter au panier
+      </AddToBasket>
     </VideoContainer>
   );
 }
 
 VideoTitle.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  movie: PropTypes.object.isRequired,
+  sendMovie: PropTypes.func.isRequired
 };

@@ -2,19 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import styled from "@emotion/styled";
+import theme from "../styles/theme";
 
 const VideoItem = styled("article")`
   position: relative;
   scroll-snap-align: start;
 
   .bloc-infos {
-    display: inherit;
+    display: none;
     position: absolute;
+    width: 100%;
+    padding: 0 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     justify-content: center;
     align-items: center;
+    text-align: center;
   }
 
   .bloc-hover {
@@ -33,6 +37,15 @@ const VideoItem = styled("article")`
   }
 `;
 
+const MovieTitle = styled("h3")`
+  font-size: 24px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: ${theme.fonts.logo};
+  color: ${theme.colors.primary};
+  letter-spacing: 1px;
+`;
+
 export default function VideoListItem({ movie, callback }) {
   const handleClick = () => {
     callback(movie);
@@ -47,7 +60,7 @@ export default function VideoListItem({ movie, callback }) {
         <img alt={movie.name} src={IMAGE_BASE_URL + movie.poster_path}></img>
       </div>
       <div className="bloc-infos">
-        <h3 className="title_list_item">{movie.title}</h3>
+        <MovieTitle>{movie.title}</MovieTitle>
         <p className="title_list_item">Price {movie.price}</p>
       </div>
     </VideoItem>

@@ -29,6 +29,7 @@ export default function App() {
   const [keyPrimeMovie, setPrimeMovieKey] = useState({});
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
   const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
+  const [basket, setBasket] = useState([]); // Collection Of Object
 
   // API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
@@ -46,7 +47,6 @@ export default function App() {
         );
 
         const popularMovies = res.data.results.slice(1, 6);
-        console.log(popularMovies);
         // Add random price to movie between 20 and 30
         popularMovies.map(movie => {
           return (movie.price = getRandom(20, 30));
@@ -86,7 +86,7 @@ export default function App() {
     }
   }, [primeMovie]);
 
-  const receiveMovie = movie => {
+  const receivePrimeMovie = movie => {
     setPrimeMovie(movie);
   };
 
@@ -134,6 +134,36 @@ export default function App() {
     searchMovie();
   };
 
+  // Receive movies
+  const receiveMovie = movie => {
+    movie.qty = movie.qty + 1;
+    AddMovieToBasket(movie, basket);
+  };
+
+  const AddMovieToBasket = (movie, basket) => {
+    //Si mon panier est vide
+    if (basket.length == 0) {
+      //Panier vide j'ajouter mon movie
+      movie.qty = 1;
+      basket.push(movie);
+      setBasket(basket);
+    } else {
+      //je parcours mon panier je vérifie si mon élément est déjà présent.
+      basket.map(element => {
+        // Si j'ai une corrrespondance
+        if (movie.id == element.id) {
+          // Élément déjà présent j'incrémente la quantité
+          element.qty += 1;
+        } else {
+          // Mon élément n'est pas présent je l'ajoute simplement au panier
+          movie.qty = 1;
+          basket.push(movie);
+          setBasket(basket);
+        }
+      });
+    }
+  };
+
   return (
     <section>
       <GlobalStyle />
@@ -147,12 +177,9 @@ export default function App() {
         />
         <PrimeVideo>
           <Video moviekey={keyPrimeMovie} />
-          <VideoDetail
-            title={primeMovie.original_title}
-            description={primeMovie.overview}
-          />
+          <VideoDetail sendMovie={receiveMovie} movie={primeMovie} />
         </PrimeVideo>
-        <VideoList sendMovie={receiveMovie} movies={movies} />
+        <VideoList sendPrimeMovie={receivePrimeMovie} movies={movies} />
       </div>
     </section>
   );
