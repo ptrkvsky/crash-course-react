@@ -5,6 +5,7 @@ import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
 import Video from "../components/Video";
 import Header from "./Header";
+import BasketList from "./BasketList";
 
 // Lib + helpers
 import axios from "axios";
@@ -86,6 +87,27 @@ export default function App() {
     }
   }, [primeMovie]);
 
+  // Second function that get a movie
+  useEffect(() => {
+    async function setVideoKey(movie) {
+      try {
+        const res = await axios(
+          `${API_END_POINT}movie/${movie.id}?append_to_response=videos&${API_KEY}`
+        );
+        if (res.data.videos.results.length > 0) {
+          setPrimeMovieKey(res.data.videos.results[0].key);
+        }
+      } catch (e) {
+        console.log(e);
+        throw e;
+      }
+    }
+
+    if (!isEmpty(primeMovie)) {
+      setVideoKey(primeMovie);
+    }
+  }, [primeMovie]);
+
   const receivePrimeMovie = movie => {
     setPrimeMovie(movie);
   };
@@ -111,6 +133,10 @@ export default function App() {
     }
     searchMovie();
   };
+
+  useEffect(() => {
+    console.log("basketeffect", basket);
+  }, [basket]);
 
   const receiveHandleChange = text => {
     async function searchMovie() {
@@ -149,18 +175,24 @@ export default function App() {
       setBasket(basket);
     } else {
       //je parcours mon panier je vérifie si mon élément est déjà présent.
-      basket.map(element => {
-        // Si j'ai une corrrespondance
-        if (movie.id == element.id) {
-          // Élément déjà présent j'incrémente la quantité
-          element.qty += 1;
-        } else {
-          // Mon élément n'est pas présent je l'ajoute simplement au panier
-          movie.qty = 1;
-          basket.push(movie);
-          setBasket(basket);
-        }
-      });
+      if (basket) {
+        basket.map(element => {
+          // Si j'ai une corrrespondance
+          if (movie.id == element.id) {
+            // Élément déjà présent j'incrémente la quantité
+            element.qty += 1;
+            const basketCopy = { ...basket };
+            setBasket(basketCopy);
+          } else {
+            // Mon élément n'est pas présent je l'ajoute simplement au panier
+            movie.qty = 1;
+            basket.push(movie);
+            setBasket(basket);
+          }
+        });
+      } else {
+        console.log("out");
+      }
     }
   };
 
@@ -180,6 +212,7 @@ export default function App() {
           <VideoDetail sendMovie={receiveMovie} movie={primeMovie} />
         </PrimeVideo>
         <VideoList sendPrimeMovie={receivePrimeMovie} movies={movies} />
+        <BasketList basket={basket} />
       </div>
     </section>
   );

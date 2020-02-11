@@ -28,7 +28,7 @@ export default function SearchBar({
   };
 
   return (
-    <form className="" onSubmit={handleSubmit}>
+    <form id="mysearchbar" onSubmit={handleSubmit}>
       <div className="input-group mb-3 searchbar">
         <Typeahead
           {...searchText}
@@ -44,7 +44,7 @@ export default function SearchBar({
         />
         <span className="input-group-append">
           <button className="btn btn-outline-secondary" type="submit">
-            Go !
+            GO GO GO !
           </button>
         </span>
       </div>

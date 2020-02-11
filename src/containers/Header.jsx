@@ -50,7 +50,7 @@ const Header = () => {
       <Container className="max-container">
         <Logo>Movie App</Logo>
         <Nav>
-          <LinkNav href="#search">Rechercher</LinkNav>
+          <LinkNav href="#main-container">Rechercher</LinkNav>
           <LinkNav href="#popular">A la une</LinkNav>
           <LinkNav href="#basket">Panier</LinkNav>
         </Nav>
