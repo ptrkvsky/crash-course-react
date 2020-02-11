@@ -18,14 +18,12 @@ const Title = styled("h2")`
 
 const renderBasket = basket => {
   if (basket && basket.length > 0) {
-    console.log("BasketList", "ya des lines", basket);
     const basketTest = basket.map(itemBasket => (
-      <BasketLine key={itemBasket} itemBasket={itemBasket} />
+      <BasketLine key={itemBasket.id} itemBasket={itemBasket} />
     ));
-    console.log("Mon basketTest basket -->", basketTest);
     return basketTest;
   } else {
-    console.log("0 line");
+    console.log("NO BASKET");
   }
 };
 
@@ -33,7 +31,6 @@ const BasketList = ({ basket }) => {
   return (
     <>
       <Title>Mon panier de grand prince</Title>
-      {console.log("BasketListbasket", basket)}
       <BlocBasket>{renderBasket(basket)}</BlocBasket>
     </>
   );

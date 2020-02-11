@@ -31,7 +31,6 @@ export default function App() {
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
   const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
   const [basket, setBasket] = useState([]); // Collection Of Object
-
   // API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
   const POPULAR_MOVIES_URL = "discover/movie?sort_by=popularity.desc&page=1";
@@ -56,6 +55,7 @@ export default function App() {
         setMovies(popularMovies);
 
         const tabPrimeMovie = res.data.results.slice(0, 1);
+        tabPrimeMovie[0].price = getRandom(20, 30); // random price;
         setPrimeMovie(tabPrimeMovie[0]);
       } catch (e) {
         console.log(e);
@@ -87,7 +87,7 @@ export default function App() {
     }
   }, [primeMovie]);
 
-  // Second function that get a movie
+  /*
   useEffect(() => {
     async function setVideoKey(movie) {
       try {
@@ -107,7 +107,7 @@ export default function App() {
       setVideoKey(primeMovie);
     }
   }, [primeMovie]);
-
+*/
   const receivePrimeMovie = movie => {
     setPrimeMovie(movie);
   };
@@ -134,10 +134,6 @@ export default function App() {
     searchMovie();
   };
 
-  useEffect(() => {
-    console.log("basketeffect", basket);
-  }, [basket]);
-
   const receiveHandleChange = text => {
     async function searchMovie() {
       try {
@@ -162,7 +158,6 @@ export default function App() {
 
   // Receive movies
   const receiveMovie = movie => {
-    movie.qty = movie.qty + 1;
     AddMovieToBasket(movie, basket);
   };
 
@@ -172,24 +167,29 @@ export default function App() {
       //Panier vide j'ajouter mon movie
       movie.qty = 1;
       basket.push(movie);
-      setBasket(basket);
+      setBasket([...basket]);
     } else {
       //je parcours mon panier je vérifie si mon élément est déjà présent.
+
       if (basket) {
+        let elemPresent = false;
         basket.map(element => {
           // Si j'ai une corrrespondance
           if (movie.id == element.id) {
+            console.log("Élément présent");
             // Élément déjà présent j'incrémente la quantité
             element.qty += 1;
-            const basketCopy = { ...basket };
-            setBasket(basketCopy);
-          } else {
-            // Mon élément n'est pas présent je l'ajoute simplement au panier
-            movie.qty = 1;
-            basket.push(movie);
-            setBasket(basket);
+            setBasket([...basket]);
+            elemPresent = true;
           }
         });
+        if (!elemPresent) {
+          console.log("Élément pas présent");
+          // Mon élément n'est pas présent je l'ajoute simplement au panier
+          movie.qty = 1;
+          basket.push(movie);
+          setBasket([...basket]);
+        }
       } else {
         console.log("out");
       }

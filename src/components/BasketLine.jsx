@@ -14,7 +14,6 @@ const BlocBasket = styled("section")`
 `;
 
 const Basket = ({ itemBasket }) => {
-  console.log("itembasket", itemBasket);
   return (
     <BlocBasket>
       <div> Nom: {itemBasket.title}</div>
