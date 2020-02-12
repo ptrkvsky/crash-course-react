@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-//Components
+
+// Class
+import ClassBasket from "../class/Basket";
+
+// Components
 import VideoList from "./VideoList";
 import SearchBar from "../components/SearchBar";
 import VideoDetail from "../components/VideoDetail";
@@ -26,11 +30,12 @@ const PrimeVideo = styled("div")`
 
 // Démarrage application
 export default function App() {
+  const MyBasket = new ClassBasket();
   const [movies, setMovies] = useState([]); // Most popular movies
   const [keyPrimeMovie, setPrimeMovieKey] = useState({});
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
   const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
-  const [basket, setBasket] = useState([]); // Collection Of Object
+  const [basket, setBasket] = useState(MyBasket.basket); // Collection Of Object
   // API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
   const POPULAR_MOVIES_URL = "discover/movie?sort_by=popularity.desc&page=1";
@@ -87,27 +92,6 @@ export default function App() {
     }
   }, [primeMovie]);
 
-  /*
-  useEffect(() => {
-    async function setVideoKey(movie) {
-      try {
-        const res = await axios(
-          `${API_END_POINT}movie/${movie.id}?append_to_response=videos&${API_KEY}`
-        );
-        if (res.data.videos.results.length > 0) {
-          setPrimeMovieKey(res.data.videos.results[0].key);
-        }
-      } catch (e) {
-        console.log(e);
-        throw e;
-      }
-    }
-
-    if (!isEmpty(primeMovie)) {
-      setVideoKey(primeMovie);
-    }
-  }, [primeMovie]);
-*/
   const receivePrimeMovie = movie => {
     setPrimeMovie(movie);
   };
@@ -194,6 +178,7 @@ export default function App() {
         console.log("out");
       }
     }
+    MyBasket.getTotalItems(basket);
   };
 
   return (
