@@ -19,23 +19,17 @@ import getRandom from "../utils/getRandom";
 // Style
 import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "../styles/GlobalStyle";
-import styled from "@emotion/styled";
-
-const PrimeVideo = styled("div")`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 60px 0;
-  grid-gap: 60px;
-`;
+import { PrimeVideo } from "../styles/containers/StyleApp";
 
 // Démarrage application
 export default function App() {
-  const MyBasket = new ClassBasket();
   const [movies, setMovies] = useState([]); // Most popular movies
   const [keyPrimeMovie, setPrimeMovieKey] = useState({});
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
   const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
-  const [basket, setBasket] = useState(MyBasket.basket); // Collection Of Object
+  const [basket, setBasket] = useState([]);
+  const MyBasket = new ClassBasket(basket, setBasket);
+
   // API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
   const POPULAR_MOVIES_URL = "discover/movie?sort_by=popularity.desc&page=1";
@@ -51,7 +45,7 @@ export default function App() {
           `${API_END_POINT}${POPULAR_MOVIES_URL}&${API_KEY}`
         );
 
-        const popularMovies = res.data.results.slice(1, 6);
+        const popularMovies = res.data.results.slice(1, 20);
         // Add random price to movie between 20 and 30
         popularMovies.map(movie => {
           return (movie.price = getRandom(20, 30));
@@ -111,7 +105,7 @@ export default function App() {
           console.log("no search results sorry");
         }
       } catch (e) {
-        console.log(e);
+        console.error(e);
         throw e;
       }
     }
@@ -140,51 +134,10 @@ export default function App() {
     searchMovie();
   };
 
-  // Receive movies
-  const receiveMovie = movie => {
-    AddMovieToBasket(movie, basket);
-  };
-
-  const AddMovieToBasket = (movie, basket) => {
-    //Si mon panier est vide
-    if (basket.length == 0) {
-      //Panier vide j'ajouter mon movie
-      movie.qty = 1;
-      basket.push(movie);
-      setBasket([...basket]);
-    } else {
-      //je parcours mon panier je vérifie si mon élément est déjà présent.
-
-      if (basket) {
-        let elemPresent = false;
-        basket.map(element => {
-          // Si j'ai une corrrespondance
-          if (movie.id == element.id) {
-            console.log("Élément présent");
-            // Élément déjà présent j'incrémente la quantité
-            element.qty += 1;
-            setBasket([...basket]);
-            elemPresent = true;
-          }
-        });
-        if (!elemPresent) {
-          console.log("Élément pas présent");
-          // Mon élément n'est pas présent je l'ajoute simplement au panier
-          movie.qty = 1;
-          basket.push(movie);
-          setBasket([...basket]);
-        }
-      } else {
-        console.log("out");
-      }
-    }
-    MyBasket.getTotalItems(basket);
-  };
-
   return (
     <section>
       <GlobalStyle />
-      <Header />
+      <Header basket={basket} />
       <div className="max-container">
         <SearchBar
           id="search"
@@ -194,10 +147,15 @@ export default function App() {
         />
         <PrimeVideo>
           <Video moviekey={keyPrimeMovie} />
-          <VideoDetail sendMovie={receiveMovie} movie={primeMovie} />
+          <VideoDetail myBasket={MyBasket} movie={primeMovie} />
         </PrimeVideo>
-        <VideoList sendPrimeMovie={receivePrimeMovie} movies={movies} />
-        <BasketList basket={basket} />
+        <VideoList
+          myBasket={MyBasket}
+          sendPrimeMovie={receivePrimeMovie}
+          movies={movies}
+          setPrimeMovie={setPrimeMovie}
+        />
+        <BasketList basket={basket} myBasket={MyBasket} />
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import styled from "@emotion/styled";
+import Basket from "../class/Basket";
 
 const BlocBasket = styled("section")`
   display: flex;
@@ -13,18 +14,25 @@ const BlocBasket = styled("section")`
   margin-bottom: 40px;
 `;
 
-const Basket = ({ itemBasket }) => {
+const handleClick = (itemBasket, basket) => {
+  console.log(itemBasket, basket);
+};
+
+const BasketLine = ({ itemBasket, basket }) => {
   return (
     <BlocBasket>
-      <div> Nom: {itemBasket.title}</div>
+      <div>
+        Nom: {itemBasket.title}
+        <button onClick={() => handleClick(itemBasket, basket)}> Delete</button>
+      </div>
       <div> Price : {itemBasket.price}</div>
       <div> Qty : {itemBasket.qty}</div>
     </BlocBasket>
   );
 };
 
-Basket.propTypes = {
+BasketLine.propTypes = {
   itemBasket: PropTypes.any
 };
 
-export default Basket;
+export default BasketLine;

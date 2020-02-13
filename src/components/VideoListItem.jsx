@@ -46,15 +46,11 @@ const MovieTitle = styled("h3")`
   letter-spacing: 1px;
 `;
 
-export default function VideoListItem({ movie, callback }) {
-  const handleClick = () => {
-    callback(movie);
-  };
-
+export default function VideoListItem({ movie, myBasket, setPrimeMovie }) {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
   return (
-    <VideoItem onClick={handleClick}>
+    <VideoItem>
       <div className="bloc-hover"></div>
       <div className="media">
         <img alt={movie.name} src={IMAGE_BASE_URL + movie.poster_path}></img>
@@ -62,12 +58,22 @@ export default function VideoListItem({ movie, callback }) {
       <div className="bloc-infos">
         <MovieTitle>{movie.title}</MovieTitle>
         <p className="title_list_item">Price {movie.price}</p>
+        <p className="btn-savoirplus" onClick={() => setPrimeMovie(movie)}>
+          En savoir plus
+        </p>
+        <p
+          className="btn-addtobasket"
+          onClick={() => myBasket.addBasketItem(movie)}
+        >
+          Ajouter au panier
+        </p>
       </div>
     </VideoItem>
   );
 }
 
 VideoListItem.propTypes = {
-  movie: PropTypes.object.isRequired,
-  callback: PropTypes.func.isRequired
+  setPrimeMovie: PropTypes.func.isRequired,
+  myBasket: PropTypes.object.isRequired,
+  movie: PropTypes.object.isRequired
 };

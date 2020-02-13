@@ -20,7 +20,12 @@ const Titre = styled("h2")`
   margin-bottom: 30px;
 `;
 
-export default function VideoList({ sendPrimeMovie, movies }) {
+export default function VideoList({
+  sendPrimeMovie,
+  movies,
+  myBasket,
+  setPrimeMovie
+}) {
   const receiveCallback = movie => {
     sendPrimeMovie(movie);
   };
@@ -33,8 +38,8 @@ export default function VideoList({ sendPrimeMovie, movies }) {
           <VideoListItem
             key={movie.id}
             movie={movie}
-            alt={`Affiche ${movie.original_title}`}
-            callback={receiveCallback}
+            setPrimeMovie={setPrimeMovie}
+            myBasket={myBasket}
           />
         ))}
       </VideosContainer>
@@ -43,6 +48,8 @@ export default function VideoList({ sendPrimeMovie, movies }) {
 }
 
 VideoList.propTypes = {
+  setPrimeMovie: PropTypes.func.isRequired,
+  myBasket: PropTypes.object.isRequired,
   movies: PropTypes.array.isRequired,
   sendPrimeMovie: PropTypes.func.isRequired
 };

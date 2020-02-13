@@ -19,7 +19,7 @@ const Title = styled("h2")`
 const renderBasket = basket => {
   if (basket && basket.length > 0) {
     const basketTest = basket.map(itemBasket => (
-      <BasketLine key={itemBasket.id} itemBasket={itemBasket} />
+      <BasketLine key={itemBasket.id} basket={basket} itemBasket={itemBasket} />
     ));
     return basketTest;
   } else {
@@ -27,7 +27,8 @@ const renderBasket = basket => {
   }
 };
 
-const BasketList = ({ basket }) => {
+const BasketList = ({ basket, myBasket }) => {
+  console.log({ myBasket });
   return (
     <>
       <Title>Mon panier de grand prince</Title>
