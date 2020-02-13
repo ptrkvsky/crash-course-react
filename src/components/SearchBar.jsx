@@ -22,7 +22,6 @@ export default function SearchBar({
   };
 
   const handleSubmit = e => {
-    console.log(handleSubmit);
     sendSearchText(document.querySelector(".rbt-input-main").value);
     e.preventDefault();
   };

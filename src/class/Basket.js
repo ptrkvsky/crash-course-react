@@ -9,6 +9,10 @@ class Basket {
     this.basket = basket;
   }
 
+  getBasket() {
+    return this.basket;
+  }
+
   // Return number of elements in basket passed as parameter
   getTotalItems(basket = this.basket) {
     if (basket && basket.length > 0) {
@@ -22,32 +26,41 @@ class Basket {
     }
   }
 
+  // Return the total amount of the basket
+  getTotalBasket(basket = this.basket) {
+    if (basket && basket.length > 0) {
+      const totalBasket = basket.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.qty * currentValue.price,
+        0
+      );
+      return totalBasket;
+    } else {
+      console.error("---- ATTENTION NO BASKET PROVIDED TO getTotalBasket ----");
+    }
+  }
+
   addBasketItem(movie) {
     if (movie) {
-      //Si mon panier est vide
+      // If basket empty we add element with qt1 +
       if (this.basket.length == 0) {
-        //Panier vide j'ajouter mon movie
         movie.qty = 1;
         this.basket.push(movie);
         this.setBasket([...this.basket]);
       } else {
-        //je parcours mon panier je vérifie si mon élément est déjà présent.
-
+        // If basket is not, i check if element is inside
         if (this.basket) {
           let elemPresent = false;
           this.basket.map(element => {
-            // Si j'ai une corrrespondance
+            // If element is inside
             if (movie.id == element.id) {
-              console.log("Élément présent");
-              // Élément déjà présent j'incrémente la quantité
               element.qty += 1;
               this.setBasket([...this.basket]);
               elemPresent = true;
             }
           });
           if (!elemPresent) {
-            console.log("Élément pas présent");
-            // Mon élément n'est pas présent je l'ajoute simplement au panier
+            //Element is not present simple add to basket
             movie.qty = 1;
             this.basket.push(movie);
             this.setBasket([...this.basket]);
@@ -64,11 +77,11 @@ class Basket {
 
   deleteBasketItem(item) {
     if (item) {
-      console.log(item);
+      // Return all element of my current basket except the one that
+      const res = this.basket.filter(element => element != item);
+      this.setBasket(res);
     } else {
-      console.error(
-        "---- ATTENTION NO BASKET PROVIDED TO deleteBasketItem ----"
-      );
+      console.error("---- ATTENTION NO ITEM PROVIDED TO deleteBasketItem ----");
     }
   }
 }

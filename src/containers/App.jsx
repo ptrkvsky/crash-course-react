@@ -155,7 +155,7 @@ export default function App() {
           movies={movies}
           setPrimeMovie={setPrimeMovie}
         />
-        <BasketList basket={basket} myBasket={MyBasket} />
+        <BasketList myBasket={MyBasket} />
       </div>
     </section>
   );

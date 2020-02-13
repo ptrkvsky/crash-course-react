@@ -16,28 +16,33 @@ const Title = styled("h2")`
   margin: 40px 0 60px;
 `;
 
-const renderBasket = basket => {
+const renderBasket = myBasket => {
+  const basket = myBasket.getBasket();
+
   if (basket && basket.length > 0) {
     const basketTest = basket.map(itemBasket => (
-      <BasketLine key={itemBasket.id} basket={basket} itemBasket={itemBasket} />
+      <BasketLine
+        myBasket={myBasket}
+        key={itemBasket.id}
+        basket={basket}
+        itemBasket={itemBasket}
+      />
     ));
     return basketTest;
-  } else {
-    console.log("NO BASKET");
   }
 };
 
-const BasketList = ({ basket, myBasket }) => {
-  console.log({ myBasket });
+const BasketList = ({ myBasket }) => {
   return (
     <>
       <Title>Mon panier de grand prince</Title>
-      <BlocBasket>{renderBasket(basket)}</BlocBasket>
+      <BlocBasket>{renderBasket(myBasket)}</BlocBasket>
     </>
   );
 };
 
 BasketList.propTypes = {
+  myBasket: PropTypes.object.isRequired,
   basket: PropTypes.any
 };
 

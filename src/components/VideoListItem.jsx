@@ -57,10 +57,14 @@ export default function VideoListItem({ movie, myBasket, setPrimeMovie }) {
       </div>
       <div className="bloc-infos">
         <MovieTitle>{movie.title}</MovieTitle>
-        <p className="title_list_item">Price {movie.price}</p>
-        <p className="btn-savoirplus" onClick={() => setPrimeMovie(movie)}>
-          En savoir plus
-        </p>
+        <p className="title_list_item">{movie.price} $</p>
+        <a
+          href="#main-container"
+          className="btn-savoirplus"
+          onClick={() => setPrimeMovie(movie)}
+        >
+          Voir la bande annonce
+        </a>
         <p
           className="btn-addtobasket"
           onClick={() => myBasket.addBasketItem(movie)}
