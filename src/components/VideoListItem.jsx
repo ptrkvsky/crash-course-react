@@ -53,7 +53,11 @@ export default function VideoListItem({ movie, myBasket, setPrimeMovie }) {
     <VideoItem>
       <div className="bloc-hover"></div>
       <div className="media">
-        <img alt={movie.name} src={IMAGE_BASE_URL + movie.poster_path}></img>
+        <img
+          loading="lazy"
+          alt={movie.name}
+          src={IMAGE_BASE_URL + movie.poster_path}
+        ></img>
       </div>
       <div className="bloc-infos">
         <MovieTitle>{movie.title}</MovieTitle>
