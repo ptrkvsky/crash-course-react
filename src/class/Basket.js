@@ -35,8 +35,6 @@ class Basket {
         0
       );
       return totalBasket;
-    } else {
-      console.error("---- ATTENTION NO BASKET PROVIDED TO getTotalBasket ----");
     }
   }
 
@@ -72,6 +70,21 @@ class Basket {
       this.getTotalItems(this.basket);
     } else {
       console.error("---- ATTENTION NO MOVIE PROVIDED TO addBasketItem ----");
+    }
+  }
+
+  minusBasketItem(item) {
+    if (item) {
+      // Return all element of my current basket except the one that
+      const res = this.basket.map(product => {
+        if (product == item) {
+          product.qty--;
+        }
+        return product;
+      });
+      this.setBasket(res);
+    } else {
+      console.error("---- ATTENTION NO ITEM PROVIDED TO minusBasketItem ----");
     }
   }
 

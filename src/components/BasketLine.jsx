@@ -26,6 +26,10 @@ const BasketLine = ({ itemBasket, basket, myBasket }) => {
           {" "}
           Delete
         </button>
+        <button onClick={() => myBasket.minusBasketItem(itemBasket)}>
+          {" "}
+          Minus
+        </button>
       </div>
       <div> Prix : {itemBasket.price}</div>
       <div> Qty : {itemBasket.qty}</div>
@@ -34,6 +38,7 @@ const BasketLine = ({ itemBasket, basket, myBasket }) => {
 };
 
 BasketLine.propTypes = {
+  myBasket: PropTypes.object.isRequired,
   basket: PropTypes.array.isRequired,
   itemBasket: PropTypes.object.isRequired
 };

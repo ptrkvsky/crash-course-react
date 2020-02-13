@@ -37,6 +37,7 @@ const BasketList = ({ myBasket }) => {
     <>
       <Title>Mon panier de grand prince</Title>
       <BlocBasket>{renderBasket(myBasket)}</BlocBasket>
+      {myBasket.getTotalBasket()}
     </>
   );
 };
