@@ -1,33 +1,20 @@
 import PropTypes from "prop-types";
 import React from "react";
-import styled from "@emotion/styled";
-
-const BlocBasket = styled("section")`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 20px;
-  align-items: center;
-  box-shadow: 13px 13px 20px #191d25, -4px -5px 7px #272d3b;
-  border-radius: 20px;
-  margin-bottom: 40px;
-`;
+import {BlocBasket} from "../styles/components/StyleBasketLine"
 
 const handleClick = (itemBasket, myBasket) => {
   myBasket.deleteBasketItem(itemBasket);
 };
 
-const BasketLine = ({ itemBasket, basket, myBasket }) => {
+const BasketLine = ({ itemBasket, myBasket }) => {
   return (
     <BlocBasket>
       <div>
         Nom: {itemBasket.title}
         <button onClick={() => handleClick(itemBasket, myBasket)}>
-          {" "}
           Delete
         </button>
         <button onClick={() => myBasket.minusBasketItem(itemBasket)}>
-          {" "}
           Minus
         </button>
       </div>
