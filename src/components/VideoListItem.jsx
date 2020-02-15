@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {VideoItem, MovieTitle} from "../styles/components/StyleVideoListItem"
 
-export default function VideoListItem({ movie, myBasket, setPrimeMovie }) {
+export default function VideoListItem({ movie, myBasket, myMovies }) {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/";
 
   return (
@@ -21,7 +21,7 @@ export default function VideoListItem({ movie, myBasket, setPrimeMovie }) {
         <a
           href="#main-container"
           className="btn-savoirplus"
-          onClick={() => setPrimeMovie(movie)}
+          onClick={() => myMovies.setPrimeMovie(movie)}
         >
           Voir la bande annonce
         </a>
@@ -37,6 +37,7 @@ export default function VideoListItem({ movie, myBasket, setPrimeMovie }) {
 }
 
 VideoListItem.propTypes = {
+  myMovies: PropTypes.func.isRequired,
   setPrimeMovie: PropTypes.func.isRequired,
   myBasket: PropTypes.object.isRequired,
   movie: PropTypes.object.isRequired

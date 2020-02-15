@@ -4,16 +4,14 @@ import PropTypes from "prop-types";
 import "react-bootstrap-typeahead/css/Typeahead.css";
 
 export default function SearchBar({
-  sendSearchText,
-  sendHandleChange,
-  tabMovieTypehead
+  myMovies,
 }) {
   const [searchText, setSearchText] = useState("");
   const [autoComplete, setAutoComplete] = useState([]);
 
   const handleChange = e => {
-    sendHandleChange(searchText);
-    const collecMovies = tabMovieTypehead.map(movie => {
+    myMovies.handleChangeSearchBar(searchText);
+    const collecMovies = myMovies.moviesTypehead.map(movie => {
       const objMovie = { name: movie.title };
       return objMovie;
     });
@@ -22,7 +20,7 @@ export default function SearchBar({
   };
 
   const handleSubmit = e => {
-    sendSearchText(document.querySelector(".rbt-input-main").value);
+    myMovies.handleSubmitSearchBar(document.querySelector(".rbt-input-main").value);
     e.preventDefault();
   };
 
@@ -52,7 +50,6 @@ export default function SearchBar({
 }
 
 SearchBar.propTypes = {
-  sendSearchText: PropTypes.func.isRequired,
-  sendHandleChange: PropTypes.func.isRequired,
+  myMovies: PropTypes.object.isRequired,
   tabMovieTypehead: PropTypes.array.isRequired
 };

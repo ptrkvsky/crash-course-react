@@ -5,20 +5,19 @@ import {VideosContainer, Titre} from "../styles/containers/StyleVideoList"
 
 
 export default function VideoList({
-  movies,
   myBasket,
-  setPrimeMovie
+  myMovies,
 }) {
 
   return (
     <section>
       <Titre id="popular">Les films populaires</Titre>
       <VideosContainer>
-        {movies.map(movie => (
+        {myMovies.getMovies().map(movie => (
           <VideoListItem
             key={movie.id}
             movie={movie}
-            setPrimeMovie={setPrimeMovie}
+            myMovies={myMovies}
             myBasket={myBasket}
           />
         ))}
@@ -28,8 +27,6 @@ export default function VideoList({
 }
 
 VideoList.propTypes = {
-  setPrimeMovie: PropTypes.func.isRequired,
+  myMovies: PropTypes.object.isRequired,
   myBasket: PropTypes.object.isRequired,
-  movies: PropTypes.array.isRequired,
-  sendPrimeMovie: PropTypes.func.isRequired
 };

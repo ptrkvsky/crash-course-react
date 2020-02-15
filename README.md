@@ -18,7 +18,7 @@ Après avoir téléchargé/cloné le dépôt
 
 **Axios** - Interroger une A.P.I. https://github.com/axios/axios
 
-## Organisation du code
+## Structure des fichiers/dossiers
 **Dossier** / fichier *.eslintrc* fichier de configuration Eslint. https://eslint.org/
 
 **Dossier** *build* - Application déployée sur le serveur (npm run build).
@@ -27,7 +27,9 @@ Après avoir téléchargé/cloné le dépôt
 
 **Dossier** *src* - Code global de l'application.
 
-**Dossier** *src/class* - Contient la partie aplicative de l'application, contient seulement la class Basket qui gère  méthodes pour ajouter, supprimer.... des éléments au panier. En cours : déporter la connexion à l'API et la récupération de film dans cette partie.
+**Dossier** *src/class* - Contient la partie aplicative de l'application.
+* Basket.js : Gère tous les éléments du panier (ajout, suppression, montant total etc...)
+* Movies.js : Gère tout ce qui concerne la récupération de film
 
 **Dossier** *src/components/containers* - Contient les composants React de l'application, le dossier containers contient les composants parents (Header, Videolist....)
 
