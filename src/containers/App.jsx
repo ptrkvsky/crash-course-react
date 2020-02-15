@@ -15,7 +15,6 @@ import BasketList from "./BasketList";
 // helpers
 import isEmpty from "../utils/isEmpty";
 
-
 // Style
 import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalStyle from "../styles/GlobalStyle";

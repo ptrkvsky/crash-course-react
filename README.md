@@ -1,13 +1,19 @@
 # EDC - 02 - Création d'un panier
 
+## DEMO
+https://kovsky.netlify.com/
+Application hébergée sur https://netlify.com synchronisée avec la branche master de ce dépôt.
+
 ## Présentation de l'application.
 Application qui permet de rechercher un film via la barre de recherche, voir sa bande annonce, sa description et l'ajouter à un panier.
 Le prix est généré de manière aléatoire aléatoirement.
 L'application fait également remonter une liste de film populaire à son initialisation.
 
-## Présentation de l'application.
+## Installation.
 Après avoir téléchargé/cloné le dépôt 
-*npm init*
+*npm install*
+*npm start*
+
 
 ## Librairies utilisées
 **React** - https://fr.reactjs.org/
@@ -40,6 +46,8 @@ Après avoir téléchargé/cloné le dépôt
 **Dossier** *src/styles/containers* - idem
 
 **Dossier** *src/utils/* 
-Fonctions javascript génériques :
+Contient des fonctions javascript génériques :
 * getRandom : génère un nombre aléatoire. 
 * isEmpty : test si un object est vide.
+
+Contient également un fichier const.js avec toutes les variables en dur de l'application.
