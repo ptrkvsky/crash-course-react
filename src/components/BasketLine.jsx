@@ -20,10 +20,7 @@ const BasketLine = ({ itemBasket, myBasket }) => {
     <Line>
       <div>
         {itemBasket.title}
-        <button onClick={() => myBasket.deleteBasketItem(itemBasket)}>
-          Delete
-        </button>
-        <button>Minus</button>
+        <button onClick={() => myBasket.deleteBasketItem(itemBasket)}>D</button>
       </div>
       <div> Prix : {itemBasket.price}</div>
       <div>
