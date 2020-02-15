@@ -48,6 +48,7 @@ const SectionBasket = ({ myBasket }) => {
         Mon panier
       </Header>
       <BlocBasket>{renderBasket(myBasket)}</BlocBasket>
+      <footer>total {myBasket.getTotalBasket()}</footer>
     </Section>
   );
 };

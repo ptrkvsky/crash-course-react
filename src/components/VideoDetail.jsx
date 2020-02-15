@@ -9,12 +9,15 @@ import {
 
 export default function VideoDetail({ movie, myBasket }) {
   const { title, overview } = movie;
-
+  const handleAddBasket = () => {
+    document.querySelector("#sectionBasket").classList.add("open");
+    myBasket.addBasketItem(movie);
+  };
   return (
     <VideoContainer>
       <TitleVideo>{title}</TitleVideo>
       <DescVideo>{overview}</DescVideo>
-      <AddToBasket onClick={() => myBasket.addBasketItem(movie)}>
+      <AddToBasket onClick={() => handleAddBasket()}>
         Ajouter au panier
       </AddToBasket>
     </VideoContainer>

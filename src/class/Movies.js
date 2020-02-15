@@ -1,6 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
-import {API_END_POINT, POPULAR_MOVIES_URL, SEARCH_URL, API_KEY, PRICE_MIN, PRICE_MAX} from "../utils/const"
+import {
+  API_END_POINT,
+  POPULAR_MOVIES_URL,
+  SEARCH_URL,
+  API_KEY,
+  PRICE_MIN,
+  PRICE_MAX
+} from "../utils/const";
 import getRandom from "../utils/getRandom";
 
 class Movies {
@@ -58,20 +65,18 @@ class Movies {
       throw e;
     }
   }
-  
+
   async handleChangeSearchBar(text) {
     try {
-      if (text.length > 1) {
-        const res = await axios(
-          `${API_END_POINT}${SEARCH_URL}&${API_KEY}&query=${text}`
-        );
-        console.log({res});
-        if (res.data.total_results > 0) {
-          const tabMovieTypehead = res.data.results.slice(0, 10); // Table for typehead search (autocomplete)
-          this.setMoviesTypehead(tabMovieTypehead);
-        } else {
-          console.log("No search results sorry");
-        }
+      const res = await axios(
+        `${API_END_POINT}${SEARCH_URL}&${API_KEY}&query=${text}`
+      );
+      console.log({ res });
+      if (res.data.total_results > 0) {
+        const tabMovieTypehead = res.data.results.slice(0, 10); // Table for typehead search (autocomplete)
+        this.setMoviesTypehead(tabMovieTypehead);
+      } else {
+        console.log("No search results sorry");
       }
     } catch (e) {
       console.log(e);
