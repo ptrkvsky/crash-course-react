@@ -5,7 +5,7 @@ const Section = styled("section")`
   position: fixed;
   z-index: 20;
   top: 0;
-  right: 0;
+  right: -450px;
   width: 450px;
   height: 100%;
   background-color: ${theme.colors.mainBg};
@@ -13,7 +13,7 @@ const Section = styled("section")`
   -webkit-transition: right 0.2s;
   transition: right 0.2s;
   &.open {
-    right: -450px;
+    right: 0;
   }
 `;
 
@@ -22,21 +22,20 @@ const ButtonClose = styled("div")`
   justify-content: center;
   align-items: center;
   position: absolute;
-  left: -50px;
+  left: 0;
   width: 50px;
   height: 50px;
   color: #fff;
-  background-color: red;
+  background-color: ${theme.colors.primary};
   .open & {
-    left: 0;
+    left: -50px;
   }
 `;
 
-const BlocBasket = styled("section")`
+const BlocBasket = styled("div")`
   padding: 10px 0;
   align-items: center;
   margin-bottom: 40px;
-  border-bottom: 1px solid purple;
 `;
 
 const Header = styled("div")`
