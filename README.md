@@ -5,6 +5,10 @@ Application qui permet de rechercher un film via la barre de recherche, voir sa 
 Le prix est généré de manière aléatoire aléatoirement.
 L'application fait également remonter une liste de film populaire à son initialisation.
 
+## Présentation de l'application.
+Après avoir téléchargé/cloné le dépôt 
+*npm init*
+
 ## Librairies utilisées
 **React** - https://fr.reactjs.org/
 
@@ -15,7 +19,7 @@ L'application fait également remonter une liste de film populaire à son initia
 **Axios** - Interroger une A.P.I. https://github.com/axios/axios
 
 ## Organisation du code
-**Dossier** / fichier *.eslintrc* fichier de configuration de l'extension Eslint.
+**Dossier** / fichier *.eslintrc* fichier de configuration Eslint. https://eslint.org/
 
 **Dossier** *build* - Application déployée sur le serveur (npm run build).
 

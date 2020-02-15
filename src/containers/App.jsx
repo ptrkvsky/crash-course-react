@@ -27,8 +27,7 @@ export default function App() {
   const [keyPrimeMovie, setPrimeMovieKey] = useState({});
   const [primeMovie, setPrimeMovie] = useState([]); // List of 5 movies after the most popular
   const [moviesTypehead, setMoviesTypehead] = useState([]); // List of 5 movies after the most popular
-  const [basket, setBasket] = useState([]);
-  const MyBasket = new ClassBasket(basket, setBasket);
+  const MyBasket = new ClassBasket();
 
   // API URL
   const API_END_POINT = "https://api.themoviedb.org/3/";
@@ -123,7 +122,7 @@ export default function App() {
             const tabMovieTypehead = res.data.results.slice(0, 10); // Table for typehead search (autocomplete)
             setMoviesTypehead(tabMovieTypehead);
           } else {
-            console.log("no search results sorry");
+            console.log("No search results sorry");
           }
         }
       } catch (e) {
@@ -137,7 +136,7 @@ export default function App() {
   return (
     <section>
       <GlobalStyle />
-      <Header basket={basket} />
+      <Header basket={MyBasket.getBasket()} />
       <div className="max-container">
         <SearchBar
           id="search"

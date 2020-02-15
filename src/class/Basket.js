@@ -1,12 +1,10 @@
-class Basket {
-  constructor(basket = [], setBasket) {
-    this.basket = basket;
-    //this.setBasket = this.setBasket.bind(this);
-    this.setBasket = setBasket;
-  }
+import { useState } from "react";
 
-  setBasket(basket) {
+class Basket {
+  constructor() {
+    const [basket, setBasket] = useState([]);
     this.basket = basket;
+    this.setBasket = setBasket;
   }
 
   getBasket() {
