@@ -20,7 +20,7 @@ class Basket {
       );
       return totalItemBasket;
     } else {
-      console.error("---- ATTENTION NO BASKET PROVIDED TO getTotalItems ----");
+      return 0;
     }
   }
 
@@ -33,6 +33,8 @@ class Basket {
         0
       );
       return totalBasket;
+    } else {
+      return 0;
     }
   }
 
@@ -71,6 +73,21 @@ class Basket {
     }
   }
 
+  getItemQty(item) {
+    if (item) {
+      const res = this.basket.map(product => {
+        if (product == item) {
+          return product.qty;
+        } else {
+          return 0;
+        }
+      });
+      return res;
+    } else {
+      console.error("---- ATTENTION NO ITEM PROVIDED TO minusBasketItem ----");
+    }
+  }
+
   minusBasketItem(item) {
     if (item) {
       // Return all element of my current basket except the one that
@@ -83,6 +100,21 @@ class Basket {
       this.setBasket(res);
     } else {
       console.error("---- ATTENTION NO ITEM PROVIDED TO minusBasketItem ----");
+    }
+  }
+
+  plusBasketItem(item) {
+    if (item) {
+      // Return all element of my current basket except the one that
+      const res = this.basket.map(product => {
+        if (product == item) {
+          product.qty++;
+        }
+        return product;
+      });
+      this.setBasket(res);
+    } else {
+      console.error("---- ATTENTION NO ITEM PROVIDED TO addBasketItem ----");
     }
   }
 

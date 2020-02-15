@@ -7,14 +7,12 @@ import {
   Nav,
   LinkNav
 } from "../styles/containers/StyleHeader";
-import classBasket from "../class/Basket";
 
-const Header = ({ basket }) => {
-  let totalItemsBasket = 0;
-  if (basket) {
-    const MyBasket = new classBasket(basket);
-    totalItemsBasket = MyBasket.getTotalItems(basket);
-  }
+const Header = () => {
+  const handleClick = () => {
+    document.querySelector("#sectionBasket").classList.toggle("open");
+  };
+
   return (
     <BlocHeader>
       <Container className="max-container">
@@ -22,15 +20,13 @@ const Header = ({ basket }) => {
         <Nav>
           <LinkNav href="#main-container">Rechercher</LinkNav>
           <LinkNav href="#popular">A la une</LinkNav>
-          <LinkNav href="#basket">Panier {totalItemsBasket}</LinkNav>
+          <LinkNav onClick={() => handleClick()} href="#">
+            Panier
+          </LinkNav>
         </Nav>
       </Container>
     </BlocHeader>
   );
-};
-
-Header.propTypes = {
-  basket: PropTypes.any
 };
 
 export default Header;

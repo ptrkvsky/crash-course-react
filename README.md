@@ -50,4 +50,4 @@ Contient des fonctions javascript génériques :
 * getRandom : génère un nombre aléatoire. 
 * isEmpty : test si un object est vide.
 
-Contient également un fichier const.js avec toutes les variables en dur de l'application.
+Contient également un fichier *const.js* avec toutes les variables en dur de l'application.

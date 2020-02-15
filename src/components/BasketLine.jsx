@@ -1,26 +1,41 @@
 import PropTypes from "prop-types";
 import React from "react";
-import {BlocBasket} from "../styles/components/StyleBasketLine"
+import { Line, ChangeQty } from "../styles/components/StyleBasketLine";
 
-const handleClick = (itemBasket, myBasket) => {
-  myBasket.deleteBasketItem(itemBasket);
+const handlePlus = (itemBasket, myBasket) => {
+  document.querySelector("#minus").disabled = false;
+  myBasket.plusBasketItem(itemBasket);
+};
+
+const handleMinus = (itemBasket, myBasket) => {
+  if (myBasket.getItemQty(itemBasket) < 2) {
+    return false;
+  } else {
+    myBasket.minusBasketItem(itemBasket);
+  }
 };
 
 const BasketLine = ({ itemBasket, myBasket }) => {
   return (
-    <BlocBasket>
+    <Line>
       <div>
-        Nom: {itemBasket.title}
-        <button onClick={() => handleClick(itemBasket, myBasket)}>
+        {itemBasket.title}
+        <button onClick={() => myBasket.deleteBasketItem(itemBasket)}>
           Delete
         </button>
-        <button onClick={() => myBasket.minusBasketItem(itemBasket)}>
-          Minus
-        </button>
+        <button>Minus</button>
       </div>
       <div> Prix : {itemBasket.price}</div>
-      <div> Qty : {itemBasket.qty}</div>
-    </BlocBasket>
+      <div>
+        Qty : {itemBasket.qty}{" "}
+        <ChangeQty id="minus" onClick={() => handleMinus(itemBasket, myBasket)}>
+          -
+        </ChangeQty>
+        <ChangeQty id="plus" onClick={() => handlePlus(itemBasket, myBasket)}>
+          +
+        </ChangeQty>
+      </div>
+    </Line>
   );
 };
 
