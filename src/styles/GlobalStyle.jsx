@@ -176,6 +176,9 @@ export default function GlobalStyle() {
           font-weight: 600;
           font-size: 24px;
         }
+        .max6O {
+          max-width: 60px;
+        }
       `}
     />
   );

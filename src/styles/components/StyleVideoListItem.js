@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import theme from "../theme";
 
 const VideoItem = styled("article")`
   position: relative;
@@ -34,14 +33,26 @@ const VideoItem = styled("article")`
   }
 `;
 
+const BlocButtons = styled("div")`
+  margin-top: 30px;
+  display: inline-flex;
+  justify-content: space-between;
+  flex-direction: column;
+  .button {
+    margin-bottom: 20px;
+  }
+`;
+
+const Price = styled("p")`
+  margin-top: 20px;
+  font-size: 22px;
+`;
 const MovieTitle = styled("h3")`
-  font-size: 24px;
+  font-size: 30px;
+  text-transform: uppercase;
   font-weight: bold;
   text-transform: uppercase;
-  font-family: ${theme.fonts.logo};
-  color: ${theme.colors.primary};
   letter-spacing: 1px;
 `;
 
-
-export {VideoItem, MovieTitle}
+export { VideoItem, MovieTitle, BlocButtons, Price };

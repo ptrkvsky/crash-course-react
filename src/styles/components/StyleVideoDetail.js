@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import theme from "../theme";
+import mediaQueries from "../mediaQueries";
 
 const VideoContainer = styled("article")``;
 
@@ -11,17 +12,39 @@ const TitleVideo = styled("h1")`
   font-weight: 600;
   color: ${theme.colors.primaryColor};
   border-bottom: 1px solid ${theme.colors.secondary};
+  ${mediaQueries.mobile} {
+    font-size: 35px;
+    padding: 0 5% 15px 5%;
+  }
 `;
 
 const DescVideo = styled("p")`
   font-size: 22px;
   line-height: 1.4;
+  ${mediaQueries.mobile} {
+    padding: 0 5%;
+  }
+`;
+
+const BlocPrice = styled("div")`
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 20px 0;
+  margin-top: 20px;
+  border-top: 1px solid ${theme.colors.secondary};
+`;
+
+const Price = styled("p")`
+  font-size: 30px;
+  font-family: ${theme.fonts.logo};
+  color: ${theme.colors.primary};
+  margin-right: 20px;
 `;
 
 const AddToBasket = styled("p")`
   display: inline-block;
   padding: 11px 21px;
-  margin: 30px 0 0 0;
   font-size: 18px;
   border-radius: 10px;
   background: linear-gradient(145deg, #222833, #1d212b);
@@ -34,10 +57,14 @@ const AddToBasket = styled("p")`
   color: ${theme.colors.primary};
   cursor: pointer;
 
+  ${mediaQueries.mobile} {
+    margin-left: 5%;
+  }
+
   &:hover {
     background: #202530;
     box-shadow: inset 5px 5px 21px #191d25, inset -5px -5px 21px #272d3b;
   }
 `;
 
-export { VideoContainer, TitleVideo, DescVideo, AddToBasket };
+export { VideoContainer, TitleVideo, DescVideo, AddToBasket, Price, BlocPrice };

@@ -92,6 +92,7 @@ class Movies {
       if (res.data.total_results > 0) {
         const tabMovieTypehead = res.data.results.slice(0, 10); // Table for typehead search (autocomplete)
         const tabPrimeMovie = res.data.results.slice(0, 1);
+        tabPrimeMovie[0].price = getRandom(PRICE_MIN, PRICE_MIN);
         this.setPrimeMovie(tabPrimeMovie[0]);
         this.setMoviesTypehead(tabMovieTypehead);
       } else {

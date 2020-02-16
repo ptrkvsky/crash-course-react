@@ -20,6 +20,10 @@ const VideosContainer = styled("div")`
 const Titre = styled("h2")`
   font-size: 45px;
   margin-bottom: 30px;
+  ${mediaQueries.mobile} {
+    font-size: 35px;
+    padding: 0 5% 15px 5%;
+  }
 `;
 
 export { VideosContainer, Titre };

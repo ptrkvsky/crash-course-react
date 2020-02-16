@@ -8,7 +8,10 @@ import {
   Header,
   Bag,
   Bag__quantity,
-  BasketEmpty
+  BasketEmpty,
+  Footer,
+  FooterTotal,
+  ButtonPayment
 } from "../styles/containers/StyleSectionBasket";
 
 const renderBasket = myBasket => {
@@ -37,6 +40,11 @@ const SectionBasket = ({ myBasket }) => {
   const handleClick = () => {
     document.querySelector("#sectionBasket").classList.toggle("open");
   };
+  const handlePayment = () => {
+    myBasket.getTotalBasket() > 0
+      ? alert(myBasket.getTotalBasket())
+      : alert("Ajoute un produit au panier coco");
+  };
 
   return (
     <Section id="sectionBasket">
@@ -48,7 +56,13 @@ const SectionBasket = ({ myBasket }) => {
         Mon panier
       </Header>
       <BlocBasket>{renderBasket(myBasket)}</BlocBasket>
-      <footer>total {myBasket.getTotalBasket()}</footer>
+      <Footer>
+        <FooterTotal>
+          <p>Total</p>
+          <div>{myBasket.getTotalBasket()}</div>
+        </FooterTotal>
+        <ButtonPayment onClick={() => handlePayment()}>PAYER</ButtonPayment>
+      </Footer>
     </Section>
   );
 };

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import theme from "../theme";
+import mediaQueries from "../mediaQueries";
 
 const Section = styled("section")`
   position: fixed;
@@ -7,11 +8,13 @@ const Section = styled("section")`
   top: 0;
   right: -450px;
   width: 450px;
+  max-width: 100%;
   height: 100%;
   background-color: ${theme.colors.mainBg};
   box-sizing: border-box;
   -webkit-transition: right 0.2s;
   transition: right 0.2s;
+
   &.open {
     right: 0;
   }
@@ -27,8 +30,12 @@ const ButtonClose = styled("div")`
   height: 50px;
   color: #fff;
   background-color: ${theme.colors.primary};
+
   .open & {
     left: -50px;
+    ${mediaQueries.tabletteHorizontale} {
+      left: 0;
+    }
   }
 `;
 
@@ -77,6 +84,57 @@ const BasketEmpty = styled("p")`
   line-height: 1.5;
 `;
 
+const Footer = styled("div")`
+  position: absolute;
+  padding: 10px;
+  bottom: 0;
+  width: 100%;
+  height: 20vh;
+  z-index: 10;
+  background-color: ${theme.colors.mainBg};
+  &:before {
+    content: "";
+    width: 100%;
+    height: 20px;
+    display: block;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    background: linear-gradient(0deg, rgba(101, 119, 156, 0.1), #d6303000);
+  }
+`;
+
+const FooterTotal = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const ButtonPayment = styled("button")`
+  display: inline-block;
+  width: 100%;
+  font-size: 30px;
+  padding: 11px 21px;
+  margin: 30px 0 0 0;
+  font-size: 18px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(145deg, #222833, #1d212b);
+  box-shadow: 5px 5px 10px #15181e, -5px -5px 10px #272d3b;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: ${theme.fonts.logo};
+  font-weight: bold;
+  color: ${theme.colors.primary};
+  cursor: pointer;
+
+  &:hover {
+    background: #202530;
+    box-shadow: inset 5px 5px 21px #191d25, inset -5px -5px 21px #272d3b;
+  }
+`;
+
 export {
   BlocBasket,
   Header,
@@ -84,5 +142,8 @@ export {
   ButtonClose,
   Bag,
   Bag__quantity,
-  BasketEmpty
+  BasketEmpty,
+  Footer,
+  FooterTotal,
+  ButtonPayment
 };

@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React from "react";
 import {
   BlocHeader,
@@ -14,13 +13,13 @@ const Header = () => {
   };
 
   return (
-    <BlocHeader>
+    <BlocHeader className="blocheader">
       <Container className="max-container">
         <Logo>Movie App</Logo>
         <Nav>
           <LinkNav href="#main-container">Rechercher</LinkNav>
           <LinkNav href="#popular">A la une</LinkNav>
-          <LinkNav onClick={() => handleClick()} href="#">
+          <LinkNav className="basket" onClick={() => handleClick()} href="#">
             Panier
           </LinkNav>
         </Nav>

@@ -75,14 +75,8 @@ class Basket {
 
   getItemQty(item) {
     if (item) {
-      const res = this.basket.map(product => {
-        if (product == item) {
-          return product.qty;
-        } else {
-          return 0;
-        }
-      });
-      return res;
+      const res = this.basket.find(product => product == item);
+      return res.qty;
     } else {
       console.error("---- ATTENTION NO ITEM PROVIDED TO minusBasketItem ----");
     }

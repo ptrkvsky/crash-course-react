@@ -4,11 +4,13 @@ import {
   VideoContainer,
   TitleVideo,
   DescVideo,
-  AddToBasket
+  AddToBasket,
+  Price,
+  BlocPrice
 } from "../styles/components/StyleVideoDetail";
 
 export default function VideoDetail({ movie, myBasket }) {
-  const { title, overview } = movie;
+  const { title, overview, price } = movie;
   const handleAddBasket = () => {
     document.querySelector("#sectionBasket").classList.add("open");
     myBasket.addBasketItem(movie);
@@ -16,10 +18,14 @@ export default function VideoDetail({ movie, myBasket }) {
   return (
     <VideoContainer>
       <TitleVideo>{title}</TitleVideo>
+
       <DescVideo>{overview}</DescVideo>
-      <AddToBasket onClick={() => handleAddBasket()}>
-        Ajouter au panier
-      </AddToBasket>
+      <BlocPrice>
+        <Price>{price} $</Price>
+        <AddToBasket onClick={() => handleAddBasket()}>
+          Ajouter au panier
+        </AddToBasket>
+      </BlocPrice>
     </VideoContainer>
   );
 }

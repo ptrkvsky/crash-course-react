@@ -1,10 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { VideoItem, MovieTitle } from "../styles/components/StyleVideoListItem";
+import {
+  VideoItem,
+  MovieTitle,
+  BlocButtons,
+  Price
+} from "../styles/components/StyleVideoListItem";
 import { AddToBasket } from "../styles/components/StyleVideoDetail";
+import { IMAGE_BASE_URL } from "../utils/const";
 
 export default function VideoListItem({ movie, myBasket, myMovies }) {
-  const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/";
   const handleAddBasket = () => {
     document.querySelector("#sectionBasket").classList.add("open");
     myBasket.addBasketItem(movie);
@@ -21,17 +26,19 @@ export default function VideoListItem({ movie, myBasket, myMovies }) {
       </div>
       <div className="bloc-infos">
         <MovieTitle>{movie.title}</MovieTitle>
-        <p className="title_list_item">{movie.price} $</p>
-        <a
-          href="#main-container"
-          className="btn-savoirplus"
-          onClick={() => myMovies.setPrimeMovie(movie)}
-        >
-          Voir la bande annonce
-        </a>
-        <AddToBasket onClick={() => handleAddBasket()}>
-          Ajouter au panier
-        </AddToBasket>
+        <Price>{movie.price} $</Price>
+        <BlocButtons>
+          <AddToBasket
+            href="#main-container"
+            className="button"
+            onClick={() => myMovies.setPrimeMovie(movie)}
+          >
+            Voir la bande annonce
+          </AddToBasket>
+          <AddToBasket onClick={() => handleAddBasket()}>
+            Ajouter au panier
+          </AddToBasket>
+        </BlocButtons>
       </div>
     </VideoItem>
   );

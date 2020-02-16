@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import theme from "../theme";
+import mediaQueries from "../mediaQueries";
 
 const BlocHeader = styled("header")`
   position: sticky;
@@ -7,13 +8,16 @@ const BlocHeader = styled("header")`
   z-index: 10;
 
   padding: 10px 0;
-  align-items: center;
+  margin-bottom: 40px;
   background: linear-gradient(145deg, #222833, #1d212b);
   box-shadow: 13px 13px 21px #191d25, -13px -13px 21px #272d3b;
-  margin-bottom: 40px;
+
+  ${mediaQueries.mobile} {
+    padding: 10px 5%;
+  }
 `;
 
-const Container = styled("header")`
+const Container = styled("div")`
   display: flex;
   justify-content: space-between;
 `;
@@ -37,6 +41,9 @@ const LinkNav = styled("a")`
   font-weight: bold;
   text-transform: uppercase;
   transition: all 0.3s ease-in-out;
+  ${mediaQueries.mobile} {
+    font-size: 12px;
+  }
   &:hover {
     text-decoration: none;
     color: ${theme.colors.primary};
