@@ -8,10 +8,10 @@ import {
   LinkNav
 } from "../styles/containers/StyleHeader";
 
-const Header = () => {
-  const handleClick = () => {
-    document.querySelector("#sectionBasket").classList.toggle("open");
-  };
+const Header = ({ toggleOpen }) => {
+  // const handleClick = () => {
+  //   // document.querySelector("#sectionBasket").classList.toggle("open");
+  // };
 
   return (
     <BlocHeader>
@@ -20,7 +20,7 @@ const Header = () => {
         <Nav>
           <LinkNav href="#main-container">Rechercher</LinkNav>
           <LinkNav href="#popular">A la une</LinkNav>
-          <LinkNav onClick={() => handleClick()} href="#">
+          <LinkNav onClick={() => toggleOpen()} href="#">
             Panier
           </LinkNav>
         </Nav>

@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 import { VideoItem, MovieTitle } from "../styles/components/StyleVideoListItem";
 import { AddToBasket } from "../styles/components/StyleVideoDetail";
 
-export default function VideoListItem({ movie, myBasket, myMovies }) {
+export default function VideoListItem({
+  movie,
+  myBasket,
+  myMovies,
+  toggleOpen
+}) {
   const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500/";
   const handleAddBasket = () => {
-    document.querySelector("#sectionBasket").classList.add("open");
+    // document.querySelector("#sectionBasket").classList.add("open");
+    toggleOpen();
     myBasket.addBasketItem(movie);
   };
   return (

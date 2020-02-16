@@ -39,6 +39,13 @@ class Basket {
   }
 
   addBasketItem(movie) {
+    // Pour éviter de tout mettre dans un if
+    // tu peux faire l'inverse
+    //
+    // if(!movie) {
+    //   return;
+    // }
+    // // suite de ton code
     if (movie) {
       // If basket empty we add element with qt1 +
       if (this.basket.length == 0) {
@@ -47,6 +54,11 @@ class Basket {
         this.setBasket([...this.basket]);
       } else {
         // If basket is not, i check if element is inside
+        //
+        // Pas sure de l'intere de ce if
+        // En effet, si effectivement this.basket est null
+        // ton code ligne 51 casserai avant (this.basket.length)
+        console.log("basket", this);
         if (this.basket) {
           let elemPresent = false;
           this.basket.map(element => {
@@ -73,16 +85,30 @@ class Basket {
     }
   }
 
+  // Sur cette fonction, tu fais un map
+  // Le but d'un map c'est de tranformer un tableau en un nouveau tableau
+  // de même taill
   getItemQty(item) {
     if (item) {
-      const res = this.basket.map(product => {
-        if (product == item) {
-          return product.qty;
-        } else {
-          return 0;
-        }
+      // const res = this.basket.map(product => {
+      //   if (product == item) {
+      //     return product.qty;
+      //   } else {
+      //     return 0;
+      //   }
+      // });
+
+      // Proposition d'implémentation avec find
+      const movie = this.basket.find(product => {
+        return product.id == item.id;
       });
-      return res;
+
+      if (!movie) {
+        return 1;
+      }
+
+      return movie.qty;
+      // return res;
     } else {
       console.error("---- ATTENTION NO ITEM PROVIDED TO minusBasketItem ----");
     }

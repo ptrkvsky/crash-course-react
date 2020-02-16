@@ -7,10 +7,14 @@ import {
   AddToBasket
 } from "../styles/components/StyleVideoDetail";
 
-export default function VideoDetail({ movie, myBasket }) {
+export default function VideoDetail({ movie, myBasket, toggleOpen }) {
   const { title, overview } = movie;
   const handleAddBasket = () => {
-    document.querySelector("#sectionBasket").classList.add("open");
+    // En général, dans une appli React on va éviter au max de modifier directement le DOM
+    // Je t'ai fais une proposition d'implémentation via le state
+    // Plus tard tu pourras le réécrire avec le Context
+    // document.querySelector("#sectionBasket").classList.add("open");
+    toggleOpen();
     myBasket.addBasketItem(movie);
   };
   return (

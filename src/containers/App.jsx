@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Class
 import ClassBasket from "../class/Basket";
@@ -22,6 +22,8 @@ import { PrimeVideo } from "../styles/containers/StyleApp";
 
 // Démarrage application
 export default function App() {
+  const [basketOpen, setBasketOpen] = useState(false);
+  const toggleOpen = () => setBasketOpen(isOpen => !isOpen);
   const MyBasket = new ClassBasket();
   const myMovies = new ClassMovies();
 
@@ -40,15 +42,27 @@ export default function App() {
   return (
     <section>
       <GlobalStyle />
-      <Header />
+      <Header toggleOpen={toggleOpen} />
       <div className="max-container">
         <SearchBar id="search" myMovies={myMovies} />
         <PrimeVideo>
           <Video movieKey={myMovies.keyPrimeMovie} />
-          <VideoDetail myBasket={MyBasket} movie={myMovies.primeMovie} />
+          <VideoDetail
+            myBasket={MyBasket}
+            movie={myMovies.primeMovie}
+            toggleOpen={toggleOpen}
+          />
         </PrimeVideo>
-        <VideoList myBasket={MyBasket} myMovies={myMovies} />
-        <SectionBasket myBasket={MyBasket} />
+        <VideoList
+          myBasket={MyBasket}
+          myMovies={myMovies}
+          toggleOpen={toggleOpen}
+        />
+        <SectionBasket
+          myBasket={MyBasket}
+          basketOpen={basketOpen}
+          toggleOpen={toggleOpen}
+        />
       </div>
     </section>
   );

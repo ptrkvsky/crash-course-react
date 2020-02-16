@@ -33,13 +33,17 @@ const renderBasket = myBasket => {
   }
 };
 
-const SectionBasket = ({ myBasket }) => {
+const SectionBasket = ({ myBasket, basketOpen, toggleOpen }) => {
   const handleClick = () => {
-    document.querySelector("#sectionBasket").classList.toggle("open");
+    // En général, dans une appli React on va éviter au max de modifier directement le DOM
+    // Je t'ai fais une proposition d'implémentation via le state
+    // Plus tard tu pourras le réécrire avec le Context
+    // document.querySelector("#sectionBasket").classList.toggle("open");
+    toggleOpen();
   };
 
   return (
-    <Section id="sectionBasket">
+    <Section id="sectionBasket" className={basketOpen ? "open" : "close"}>
       <ButtonClose onClick={() => handleClick()}>X</ButtonClose>
       <Header>
         <Bag>
