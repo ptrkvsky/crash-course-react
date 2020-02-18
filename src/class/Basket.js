@@ -1,8 +1,10 @@
-import { useState } from "react";
+// import { useState } from "react";
+import createPersistedState from "use-persisted-state";
+const useBasketState = createPersistedState([]);
 
 class Basket {
   constructor() {
-    const [basket, setBasket] = useState([]);
+    const [basket, setBasket] = useBasketState();
     this.basket = basket;
     this.setBasket = setBasket;
   }

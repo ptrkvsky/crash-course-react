@@ -31,6 +31,8 @@ The movie DB https://www.themoviedb.org/documentation/api?language=fr
 
 **Axios** - Interroger une A.P.I. https://github.com/axios/axios
 
+**use-persisted-state** - Persistance des states dans le local storage (sauvegarde du panier à la fermeture de l'application) https://github.com/donavon/use-persisted-state
+
 ## Structure des fichiers/dossiers
 
 **Dossier** / fichier _.eslintrc_ fichier de configuration Eslint. https://eslint.org/
