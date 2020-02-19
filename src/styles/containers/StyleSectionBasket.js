@@ -2,23 +2,23 @@ import styled from "@emotion/styled";
 import theme from "../theme";
 import mediaQueries from "../mediaQueries";
 
-const Section = styled("section")`
-  position: fixed;
-  z-index: 20;
-  top: 0;
-  right: -450px;
-  width: 450px;
-  max-width: 100%;
-  height: 100%;
-  background-color: ${theme.colors.mainBg};
-  box-sizing: border-box;
-  -webkit-transition: right 0.2s;
-  transition: right 0.2s;
+// const Section = styled("section")`
+//   position: fixed;
+//   z-index: 20;
+//   top: 0;
+//   right: 0px;
+//   width: 450px;
+//   max-width: 100%;
+//   height: 100%;
+//   background-color: ${theme.colors.mainBg};
+//   box-sizing: border-box;
+//   -webkit-transition: right 0.2s;
+//   transition: right 0.2s;
 
-  &.open {
-    right: 0;
-  }
-`;
+//   &.open {
+//     right: 0;
+//   }
+// `;
 
 const ButtonClose = styled("div")`
   display: flex;
@@ -138,7 +138,6 @@ const ButtonPayment = styled("button")`
 export {
   BlocBasket,
   Header,
-  Section,
   ButtonClose,
   Bag,
   Bag__quantity,

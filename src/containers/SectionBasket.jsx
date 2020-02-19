@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 import BasketLine from "../components/BasketLine";
+import { motion } from "framer-motion";
 import {
-  Section,
   ButtonClose,
   BlocBasket,
   Header,
@@ -36,9 +36,28 @@ const renderBasket = myBasket => {
   }
 };
 
-const SectionBasket = ({ myBasket }) => {
+const SectionBasket = ({ myBasket, isOpen, setIsOpen }) => {
+  const sidebar = {
+    open: {
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 20,
+        restDelta: 5
+      }
+    },
+    closed: {
+      x: "100%",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40
+      }
+    }
+  };
+
   const handleClick = () => {
-    document.querySelector("#sectionBasket").classList.toggle("open");
+    setIsOpen(!isOpen);
   };
   const handlePayment = () => {
     myBasket.getTotalBasket() > 0
@@ -47,7 +66,12 @@ const SectionBasket = ({ myBasket }) => {
   };
 
   return (
-    <Section id="sectionBasket">
+    <motion.section
+      className="basket-container"
+      animate={isOpen ? "open" : "closed"}
+      initial={false}
+      variants={sidebar}
+    >
       <ButtonClose onClick={() => handleClick()}>X</ButtonClose>
       <Header>
         <Bag>
@@ -63,12 +87,14 @@ const SectionBasket = ({ myBasket }) => {
         </FooterTotal>
         <ButtonPayment onClick={() => handlePayment()}>PAYER</ButtonPayment>
       </Footer>
-    </Section>
+    </motion.section>
   );
 };
 
 SectionBasket.propTypes = {
-  myBasket: PropTypes.object.isRequired
+  isOpen: PropTypes.any,
+  myBasket: PropTypes.object.isRequired,
+  setIsOpen: PropTypes.any
 };
 
 export default SectionBasket;

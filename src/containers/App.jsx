@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 // Class
 import ClassBasket from "../class/Basket";
@@ -22,9 +22,9 @@ import { PrimeVideo } from "../styles/containers/StyleApp";
 
 // Démarrage application
 export default function App() {
+  const [isOpen, setIsOpen] = useState(false);
   const MyBasket = new ClassBasket();
   const myMovies = new ClassMovies();
-
   // First launch FetchMovies Display popular Movies + "prime movie"
   useEffect(() => {
     myMovies.fetchMovies();
@@ -40,7 +40,7 @@ export default function App() {
   return (
     <section>
       <GlobalStyle />
-      <Header />
+      <Header id={isOpen} setIsOpen={setIsOpen} isOpen={false} />
       <div className="max-container">
         <SearchBar id="search" myMovies={myMovies} />
         <PrimeVideo>
@@ -48,7 +48,11 @@ export default function App() {
           <VideoDetail myBasket={MyBasket} movie={myMovies.primeMovie} />
         </PrimeVideo>
         <VideoList myBasket={MyBasket} myMovies={myMovies} />
-        <SectionBasket myBasket={MyBasket} />
+        <SectionBasket
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          myBasket={MyBasket}
+        />
       </div>
     </section>
   );

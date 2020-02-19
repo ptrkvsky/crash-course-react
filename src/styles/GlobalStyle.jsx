@@ -179,6 +179,19 @@ export default function GlobalStyle() {
         .max6O {
           max-width: 60px;
         }
+
+        /* SIDE BAR BASKET */
+        .basket-container {
+          position: fixed;
+          z-index: 20;
+          top: 0;
+          right: 0px;
+          width: 450px;
+          max-width: 100%;
+          height: 100%;
+          background-color: ${theme.colors.mainBg};
+          box-sizing: border-box;
+        }
       `}
     />
   );

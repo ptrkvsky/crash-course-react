@@ -12,13 +12,11 @@ import {
 export default function VideoDetail({ movie, myBasket }) {
   const { title, overview, price } = movie;
   const handleAddBasket = () => {
-    document.querySelector("#sectionBasket").classList.add("open");
     myBasket.addBasketItem(movie);
   };
   return (
     <VideoContainer>
       <TitleVideo>{title}</TitleVideo>
-
       <DescVideo>{overview}</DescVideo>
       <BlocPrice>
         <Price>{price} $</Price>

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import {
   BlocHeader,
@@ -7,9 +8,9 @@ import {
   LinkNav
 } from "../styles/containers/StyleHeader";
 
-const Header = () => {
+const Header = ({ setIsOpen, isOpen }) => {
   const handleClick = () => {
-    document.querySelector("#sectionBasket").classList.toggle("open");
+    setIsOpen(!isOpen);
   };
 
   return (
@@ -26,6 +27,11 @@ const Header = () => {
       </Container>
     </BlocHeader>
   );
+};
+
+Header.propTypes = {
+  isOpen: PropTypes.any,
+  setIsOpen: PropTypes.any
 };
 
 export default Header;
