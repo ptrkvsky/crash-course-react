@@ -2,24 +2,6 @@ import styled from "@emotion/styled";
 import theme from "../theme";
 import mediaQueries from "../mediaQueries";
 
-// const Section = styled("section")`
-//   position: fixed;
-//   z-index: 20;
-//   top: 0;
-//   right: 0px;
-//   width: 450px;
-//   max-width: 100%;
-//   height: 100%;
-//   background-color: ${theme.colors.mainBg};
-//   box-sizing: border-box;
-//   -webkit-transition: right 0.2s;
-//   transition: right 0.2s;
-
-//   &.open {
-//     right: 0;
-//   }
-// `;
-
 const ButtonClose = styled("div")`
   display: flex;
   justify-content: center;
@@ -45,15 +27,14 @@ const BlocBasket = styled("div")`
   margin-bottom: 40px;
 `;
 
-const Header = styled("div")`
-  text-align: center;
-  padding: 45px 0;
-`;
-
 const Bag = styled("span")`
+  position: absolute;
+  top: 17px;
+  right: 4px;
+  z-index: 20;
+
   width: 40px;
   height: 40px;
-  position: relative;
   display: inline-block;
   vertical-align: middle;
   margin-right: 15px;
@@ -91,7 +72,6 @@ const Footer = styled("div")`
   width: 100%;
   height: 20vh;
   z-index: 10;
-  background-color: ${theme.colors.mainBg};
   &:before {
     content: "";
     width: 100%;
@@ -100,7 +80,6 @@ const Footer = styled("div")`
     position: absolute;
     top: -20px;
     left: 0;
-    background: linear-gradient(0deg, rgba(101, 119, 156, 0.1), #d6303000);
   }
 `;
 
@@ -116,28 +95,21 @@ const ButtonPayment = styled("button")`
   font-size: 30px;
   padding: 11px 21px;
   margin: 30px 0 0 0;
-  font-size: 18px;
   border-radius: 10px;
   border: none;
-  background: linear-gradient(145deg, #222833, #1d212b);
-  box-shadow: 5px 5px 10px #15181e, -5px -5px 10px #272d3b;
+
   transition: all 0.3s ease-in-out;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-family: ${theme.fonts.logo};
   font-weight: bold;
-  color: ${theme.colors.primary};
+  color: #fb2d7a;
+  background-color: #09ff00;
   cursor: pointer;
-
-  &:hover {
-    background: #202530;
-    box-shadow: inset 5px 5px 21px #191d25, inset -5px -5px 21px #272d3b;
-  }
 `;
 
 export {
   BlocBasket,
-  Header,
   ButtonClose,
   Bag,
   Bag__quantity,

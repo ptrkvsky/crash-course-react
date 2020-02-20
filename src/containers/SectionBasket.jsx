@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import {
   ButtonClose,
   BlocBasket,
-  Header,
   Bag,
   Bag__quantity,
   BasketEmpty,
@@ -16,6 +15,23 @@ import {
 
 const renderBasket = myBasket => {
   const basket = myBasket.getBasket();
+  const variants = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: 0.25,
+        y: { stiffness: 1000, velocity: -100 }
+      }
+    },
+    closed: {
+      y: 50,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 }
+      }
+    }
+  };
 
   if (basket && basket.length > 0) {
     const basketTest = basket.map(itemBasket => (
@@ -29,9 +45,15 @@ const renderBasket = myBasket => {
     return basketTest;
   } else {
     return (
-      <BasketEmpty>
-        Ajouter des produits au panier <br /> ＼(￣▽￣)／
-      </BasketEmpty>
+      <motion.div
+        variants={variants}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <BasketEmpty>
+          Ajouter des produits au panier <br /> ＼(￣▽￣)／
+        </BasketEmpty>
+      </motion.div>
     );
   }
 };
@@ -39,21 +61,42 @@ const renderBasket = myBasket => {
 const SectionBasket = ({ myBasket, isOpen, setIsOpen }) => {
   const sidebar = {
     open: {
-      x: 0,
+      clipPath: `circle(1050px at 415px 35px)`,
       transition: {
         type: "spring",
         stiffness: 20,
-        restDelta: 5
+        restDelta: 10
       }
     },
     closed: {
-      x: "100%",
+      clipPath: `circle(30px at 415px 35px)`,
       transition: {
         type: "spring",
         stiffness: 400,
         damping: 40
       }
     }
+  };
+
+  const variants = {
+    open: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        y: { stiffness: 1000, velocity: -100 }
+      }
+    },
+    closed: {
+      y: 50,
+      opacity: 0,
+      transition: {
+        y: { stiffness: 1000 }
+      }
+    }
+  };
+
+  const handleMenu = () => {
+    setIsOpen(!isOpen);
   };
 
   const handleClick = () => {
@@ -73,12 +116,16 @@ const SectionBasket = ({ myBasket, isOpen, setIsOpen }) => {
       variants={sidebar}
     >
       <ButtonClose onClick={() => handleClick()}>X</ButtonClose>
-      <Header>
-        <Bag>
-          <Bag__quantity> {myBasket.getTotalItems()}</Bag__quantity>
-        </Bag>
+      <Bag onClick={() => handleMenu()}>
+        <Bag__quantity> {myBasket.getTotalItems()}</Bag__quantity>
+      </Bag>
+      <motion.div
+        variants={variants}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+      >
         Mon panier
-      </Header>
+      </motion.div>
       <BlocBasket>{renderBasket(myBasket)}</BlocBasket>
       <Footer>
         <FooterTotal>

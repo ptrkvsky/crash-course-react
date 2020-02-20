@@ -183,14 +183,18 @@ export default function GlobalStyle() {
         /* SIDE BAR BASKET */
         .basket-container {
           position: fixed;
+          height: 100vh;
+          width: 450px;
+          max-width: 100%;
           z-index: 20;
           top: 0;
           right: 0px;
-          width: 450px;
-          max-width: 100%;
-          height: 100%;
+
+          max-width: 450px;
           background-color: ${theme.colors.mainBg};
           box-sizing: border-box;
+
+          background: linear-gradient(244deg, #ff2c77, #2c36ff);
         }
       `}
     />
