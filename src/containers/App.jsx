@@ -40,14 +40,19 @@ export default function App() {
   return (
     <section>
       <GlobalStyle />
-      <Header id={isOpen} setIsOpen={setIsOpen} isOpen={false} />
+      <Header />
       <div className="max-container">
         <SearchBar id="search" myMovies={myMovies} />
         <PrimeVideo>
           <Video movieKey={myMovies.keyPrimeMovie} />
           <VideoDetail myBasket={MyBasket} movie={myMovies.primeMovie} />
         </PrimeVideo>
-        <VideoList myBasket={MyBasket} myMovies={myMovies} />
+        <VideoList
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          myBasket={MyBasket}
+          myMovies={myMovies}
+        />
         <SectionBasket
           setIsOpen={setIsOpen}
           isOpen={isOpen}

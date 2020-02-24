@@ -64,8 +64,8 @@ const SectionBasket = ({ myBasket, isOpen, setIsOpen }) => {
       clipPath: `circle(1050px at 415px 35px)`,
       transition: {
         type: "spring",
-        stiffness: 20,
-        restDelta: 10
+        stiffness: 30,
+        restDelta: 20
       }
     },
     closed: {
@@ -74,23 +74,6 @@ const SectionBasket = ({ myBasket, isOpen, setIsOpen }) => {
         type: "spring",
         stiffness: 400,
         damping: 40
-      }
-    }
-  };
-
-  const variants = {
-    open: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        y: { stiffness: 1000, velocity: -100 }
-      }
-    },
-    closed: {
-      y: 50,
-      opacity: 0,
-      transition: {
-        y: { stiffness: 1000 }
       }
     }
   };
@@ -119,13 +102,7 @@ const SectionBasket = ({ myBasket, isOpen, setIsOpen }) => {
       <Bag onClick={() => handleMenu()}>
         <Bag__quantity> {myBasket.getTotalItems()}</Bag__quantity>
       </Bag>
-      <motion.div
-        variants={variants}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Mon panier
-      </motion.div>
+
       <BlocBasket>{renderBasket(myBasket)}</BlocBasket>
       <Footer>
         <FooterTotal>

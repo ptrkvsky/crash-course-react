@@ -9,11 +9,18 @@ import {
 import { AddToBasket } from "../styles/components/StyleVideoDetail";
 import { IMAGE_BASE_URL } from "../utils/const";
 
-export default function VideoListItem({ movie, myBasket, myMovies }) {
+export default function VideoListItem({
+  movie,
+  myBasket,
+  myMovies,
+  isOpen,
+  setIsOpen
+}) {
   const handleAddBasket = () => {
-    document.querySelector("#sectionBasket").classList.add("open");
     myBasket.addBasketItem(movie);
+    setIsOpen(true);
   };
+
   return (
     <VideoItem>
       <div className="bloc-hover"></div>
@@ -45,8 +52,10 @@ export default function VideoListItem({ movie, myBasket, myMovies }) {
 }
 
 VideoListItem.propTypes = {
-  myMovies: PropTypes.func.isRequired,
-  setPrimeMovie: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool,
+  movie: PropTypes.object.isRequired,
   myBasket: PropTypes.object.isRequired,
-  movie: PropTypes.object.isRequired
+  myMovies: PropTypes.func.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  setPrimeMovie: PropTypes.func.isRequired
 };

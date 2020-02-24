@@ -183,6 +183,7 @@ export default function GlobalStyle() {
         /* SIDE BAR BASKET */
         .basket-container {
           position: fixed;
+          padding-top: 80px;
           height: 100vh;
           width: 450px;
           max-width: 100%;
@@ -194,7 +195,11 @@ export default function GlobalStyle() {
           background-color: ${theme.colors.mainBg};
           box-sizing: border-box;
 
-          background: linear-gradient(244deg, #ff2c77, #2c36ff);
+          background: linear-gradient(
+            244deg,
+            ${theme.colors.primary},
+            ${theme.colors.tertiary}
+          );
         }
       `}
     />

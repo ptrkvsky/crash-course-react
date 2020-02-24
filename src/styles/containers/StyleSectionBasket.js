@@ -56,7 +56,7 @@ const Bag__quantity = styled("span")`
   align-items: center;
 
   font-size: 0.7em;
-  background-color: ${theme.colors.primary};
+  background-color: ${theme.colors.tertiary};
 `;
 
 const BasketEmpty = styled("p")`

@@ -1,14 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import VideoListItem from "../components/VideoListItem";
-import {VideosContainer, Titre} from "../styles/containers/StyleVideoList"
+import { VideosContainer, Titre } from "../styles/containers/StyleVideoList";
 
-
-export default function VideoList({
-  myBasket,
-  myMovies,
-}) {
-
+export default function VideoList({ myBasket, myMovies, setIsOpen, isOpen }) {
   return (
     <section>
       <Titre id="popular">Les films populaires</Titre>
@@ -19,6 +14,8 @@ export default function VideoList({
             movie={movie}
             myMovies={myMovies}
             myBasket={myBasket}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
           />
         ))}
       </VideosContainer>
@@ -28,5 +25,5 @@ export default function VideoList({
 
 VideoList.propTypes = {
   myMovies: PropTypes.object.isRequired,
-  myBasket: PropTypes.object.isRequired,
+  myBasket: PropTypes.object.isRequired
 };

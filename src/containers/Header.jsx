@@ -8,11 +8,7 @@ import {
   LinkNav
 } from "../styles/containers/StyleHeader";
 
-const Header = ({ setIsOpen, isOpen }) => {
-  const handleClick = () => {
-    setIsOpen(!isOpen);
-  };
-
+const Header = () => {
   return (
     <BlocHeader className="blocheader">
       <Container className="max-container">
@@ -20,9 +16,6 @@ const Header = ({ setIsOpen, isOpen }) => {
         <Nav>
           <LinkNav href="#main-container">Rechercher</LinkNav>
           <LinkNav href="#popular">A la une</LinkNav>
-          <LinkNav className="basket" onClick={() => handleClick()} href="#">
-            Panier
-          </LinkNav>
         </Nav>
       </Container>
     </BlocHeader>
