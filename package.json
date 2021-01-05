@@ -5,7 +5,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "framer-motion": "^1.8.4",
     "lodash": "^4.17.10",
